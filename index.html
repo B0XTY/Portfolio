@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liam O'Neill — Design Engineer</title>
+  <meta name="description" content="Liam O'Neill is a design engineer at Dartmouth's Thayer School of Engineering, working at the intersection of mechanical engineering and human-centered design.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Reset ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── Tokens ──────────────────────────────────────────── */
+    :root {
+      --bg:      #F7F7F5;
+      --ink:     #1C1C1A;
+      --muted:   #7A7A76;
+      --accent:  #C07818;
+      --white:   #FFFFFF;
+      --overlay: rgba(18, 18, 16, 0.86);
+      --gap:     10px;
+      --serif:   'Cormorant Garamond', Georgia, serif;
+      --sans:    'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Nav ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(247, 247, 245, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .nav-home {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ─── Hero ────────────────────────────────────────────── */
+    .hero {
+      padding: 168px 40px 72px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(60px, 9vw, 108px);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 28px;
+    }
+
+    .hero-tag {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .hero-tag b {
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    /* ─── Work ────────────────────────────────────────────── */
+    #work {
+      padding: 0 40px 100px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.10em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* ─── Grid ────────────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: 62fr 38fr;
+      grid-template-rows: 285px 285px 265px 180px;
+      gap: var(--gap);
+    }
+
+    .card-beefree { grid-area: 1 / 1 / 3 / 2; }
+    .card-lozorno { grid-area: 1 / 2 / 2 / 3; }
+    .card-bridge  { grid-area: 2 / 2 / 3 / 3; }
+    .card-nyc     { grid-area: 3 / 1 / 4 / 3; }
+    .card-cycle   { grid-area: 4 / 1 / 5 / 3; }
+
+    /* ─── Card ────────────────────────────────────────────── */
+    .card {
+      position: relative;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+    }
+
+    /*
+      TO ADD A PHOTO:
+      Find the card's .card-bg div and add a style like:
+      style="background-image: url('img/beefree.jpg'); background-color: #C8A055;"
+      Put your photos in an img/ folder in the same repo.
+    */
+    .card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .card:hover .card-bg { transform: scale(1.04); }
+
+    .card-info {
+      position: absolute;
+      inset: 0;
+      background: var(--overlay);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px 30px;
+    }
+
+    .card:hover .card-info { opacity: 1; }
+
+    .card-cat {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .card-pip {
+      position: absolute;
+      bottom: 18px;
+      left: 22px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.75);
+      transition: opacity 0.22s;
+      letter-spacing: 0.02em;
+      pointer-events: none;
+    }
+
+    .card:hover .card-pip { opacity: 0; }
+
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-top: 8px;
+      align-self: flex-start;
+    }
+
+    /* ─── About ───────────────────────────────────────────── */
+    #about {
+      padding: 80px 40px;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(28,28,26,0.10);
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-heading {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(36px, 4vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+    }
+
+    .about-body {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.80;
+    }
+
+    .about-body p + p { margin-top: 14px; }
+
+    /* ─── Footer ──────────────────────────────────────────── */
+    footer {
+      padding: 36px 40px 56px;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(28,28,26,0.10);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--ink); }
+
+    footer small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ─── Mobile ──────────────────────────────────────────── */
+    @media (max-width: 700px) {
+      nav { padding: 16px 20px; }
+      .nav-links { gap: 18px; }
+      .hero { padding: 130px 20px 56px; }
+      #work { padding: 0 20px 80px; }
+
+      .grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 255px);
+      }
+
+      .card-beefree,
+      .card-lozorno,
+      .card-bridge,
+      .card-nyc,
+      .card-cycle { grid-area: unset; }
+
+      #about {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 60px 20px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 32px 20px 48px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card-bg, .card-info, .card-pip { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Nav ──────────────────────────────────────────────── -->
+<nav>
+  <a href="/" class="nav-home">Liam O'Neill</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:YOUR_EMAIL_HERE">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ─── Hero ─────────────────────────────────────────────── -->
+<header class="hero">
+  <h1 class="hero-name">Liam<br>O'Neill</h1>
+  <p class="hero-tag">
+    <b>Design Engineer</b> — Thayer School of Engineering, Dartmouth '28.<br>
+    I find problems others haven't named, then build things that solve them.
+  </p>
+</header>
+
+<!-- ─── Work ─────────────────────────────────────────────── -->
+<section id="work">
+  <p class="eyebrow">Selected Work</p>
+
+  <div class="grid">
+
+    <!-- FreeBee ─────────────────────────────────────────── -->
+    <!-- Photo: add  style="background-image: url('img/beefree.jpg');"  to .card-bg below -->
+    <a href="beefree.html" class="card card-beefree">
+      <div class="card-bg" style="background-color: #C8A055;"></div>
+      <div class="card-info">
+        <span class="card-cat">Product Design · Agricultural Tools</span>
+        <span class="card-title">FreeBee — Varroa Mite Applicator</span>
+      </div>
+      <span class="card-pip">FreeBee</span>
+    </a>
+
+    <!-- Lozorno ─────────────────────────────────────────── -->
+    <a href="lozorno.html" class="card card-lozorno">
+      <div class="card-bg" style="background-color: #4E7282;"></div>
+      <div class="card-info">
+        <span class="card-cat">Infrastructure Consulting · Slovakia</span>
+        <span class="card-title">Lozorno Water Systems</span>
+      </div>
+      <span class="card-pip">Lozorno</span>
+    </a>
+
+    <!-- Bridge ──────────────────────────────────────────── -->
+    <a href="bridge.html" class="card card-bridge">
+      <div class="card-bg" style="background-color: #8A7E76;"></div>
+      <div class="card-info">
+        <span class="card-cat">Structural Engineering · Fabrication</span>
+        <span class="card-title">Birch Truss Bridge</span>
+      </div>
+      <span class="card-pip">Bridge</span>
+    </a>
+
+    <!-- NYC Book ────────────────────────────────────────── -->
+    <a href="nyc-transportation.html" class="card card-nyc">
+      <div class="card-bg" style="background-color: #3A4E5E;"></div>
+      <div class="card-info">
+        <span class="card-cat">Research · Urban Justice · Dartmouth Library Collection</span>
+        <span class="card-title">NYC Transportation Infrastructure &amp; Equity</span>
+      </div>
+      <span class="card-pip">NYC Research</span>
+    </a>
+
+    <!-- CycleMapper ─────────────────────────────────────── -->
+    <a href="cyclemapper.html" class="card card-cycle">
+      <div class="card-bg" style="background-color: #556070;"></div>
+      <div class="card-info">
+        <span class="card-cat">IoT · Urban Mobility · Berlin</span>
+        <span class="card-title">CycleMapper — Cycling Infrastructure Sensor</span>
+        <span class="badge">In Progress</span>
+      </div>
+      <span class="card-pip">CycleMapper — In Progress</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─── About ────────────────────────────────────────────── -->
+<section id="about">
+  <h2 class="about-heading">About<br>Liam</h2>
+  <div class="about-body">
+    <p>I'm a junior at Dartmouth's Thayer School of Engineering studying mechanical engineering with a focus on human-centered design and physical product development. I start from the human problem — understanding who is affected and why before thinking about solutions.</p>
+    <p>My work spans agricultural tool design, municipal infrastructure consulting, and urban systems research. I build things that solve real problems for real people.</p>
+    <p>Alongside engineering I study acting, anthropology, and urban geography — disciplines that shape how I observe problems and communicate across disciplines.</p>
+    <p>Dual US–Irish citizen. Based in Hanover, NH. Available in New York City.</p>
+  </div>
+</section>
+
+<!-- ─── Footer ───────────────────────────────────────────── -->
+<footer>
+  <nav class="footer-links">
+    <a href="mailto:YOUR_EMAIL_HERE">Email</a>
+    <a href="https://www.linkedin.com/in/liam-o-neill-b923a3294/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/B0XTY" target="_blank" rel="noopener">GitHub</a>
+  </nav>
+  <small>© 2026 Liam O'Neill</small>
+</footer>
+
+</body>
+</html>
