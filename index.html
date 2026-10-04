@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liam O'Neill — Mechanical Engineer</title>
-  <meta name="description" content="Liam O'Neill is a junior studying mechanical engineering at Dartmouth's Thayer School of Engineering. He aims to work at the intersection of mechanical engineering and human-centered design.">
+
+  <!-- ✏️ EDIT: BROWSER TAB TITLE ─────────────────────────────────────────
+       This shows in the browser tab and in Google search results.
+       Not visible on the page itself.
+  ──────────────────────────────────────────────────────────────────────── -->
+  <title>Liam O'Neill — Design Engineer</title>
+
+  <!-- ✏️ EDIT: GOOGLE DESCRIPTION ────────────────────────────────────────
+       One or two sentences shown under your link in Google search results.
+       Not visible on the page itself.
+  ──────────────────────────────────────────────────────────────────────── -->
+  <meta name="description" content="Liam O'Neill is a junior at Dartmouth's Thayer School of Engineering working at the intersection of mechanical engineering and human-centered design.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
@@ -57,11 +68,7 @@
       letter-spacing: 0.01em;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
 
     .nav-links a {
       font-size: 13px;
@@ -116,20 +123,6 @@
       margin-bottom: 20px;
     }
 
-    /*
-      Grid layout:
-      ┌─────────────────────┬──────────────┐
-      │                     │   Lozorno    │
-      │      FreeBee        ├──────────────┤
-      │                     │   Bridge     │
-      ├─────────────────────┴──────────────┤
-      │          NYC Book                  │
-      ├─────────────────────┬──────────────┤
-      │      Drawings       │   Rocketry   │
-      ├─────────────────────┴──────────────┤
-      │          CycleMapper               │
-      └────────────────────────────────────┘
-    */
     .grid {
       display: grid;
       grid-template-columns: 62fr 38fr;
@@ -290,6 +283,12 @@
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     NAV BAR — top of every page
+     ✏️ EDIT: "Liam O'Neill" = your name as it appears top-left
+     ✏️ EDIT: the three <a> links = nav items (Work / About / Contact)
+     ✏️ EDIT: href="mailto:..." = your email address
+═══════════════════════════════════════════════════════════════ -->
 <nav>
   <a href="/" class="nav-home">Liam O'Neill</a>
   <ul class="nav-links">
@@ -299,6 +298,14 @@
   </ul>
 </nav>
 
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO — the first thing visitors see
+     ✏️ EDIT: the big name (shown in large italic font)
+     ✏️ EDIT: the tagline — two lines below the name
+               Line 1 (bold): your title
+               Line 2: one-sentence description of what you do
+═══════════════════════════════════════════════════════════════ -->
 <header class="hero">
   <h1 class="hero-name">Liam<br>O'Neill</h1>
   <p class="hero-tag">
@@ -306,12 +313,23 @@
     I find problems others haven't named, then build things that solve them.
   </p>
 </header>
+<!-- END HERO ════════════════════════════════════════════════════ -->
 
+
+<!-- ═══════════════════════════════════════════════════════════════
+     WORK GRID — your project cards
+     Each card has two editable parts:
+       ✏️ EDIT: card-cat  = the small category text shown on hover
+       ✏️ EDIT: card-title = the project name shown on hover
+       ✏️ EDIT: card-pip  = the small label always visible (bottom-left)
+     To add a photo: find the card's .card-bg div and add:
+       style="background-image: url('img/filename.jpg'); background-color: #fallback;"
+═══════════════════════════════════════════════════════════════ -->
 <section id="work">
   <p class="eyebrow">Selected Work</p>
   <div class="grid">
 
-    <!-- FreeBee -->
+    <!-- ✏️ CARD 1: FreeBee ──────────────────────────────── -->
     <a href="beefree.html" class="card card-beefree">
       <div class="card-bg" style="background-color: #C8A055;"></div>
       <div class="card-info">
@@ -322,7 +340,7 @@
       <span class="card-pip">FreeBee</span>
     </a>
 
-    <!-- Lozorno -->
+    <!-- ✏️ CARD 2: Lozorno ──────────────────────────────── -->
     <a href="lozorno.html" class="card card-lozorno">
       <div class="card-bg" style="background-color: #4E7282;"></div>
       <div class="card-info">
@@ -332,7 +350,7 @@
       <span class="card-pip">Lozorno</span>
     </a>
 
-    <!-- Bridge -->
+    <!-- ✏️ CARD 3: Bridge ───────────────────────────────── -->
     <a href="bridge.html" class="card card-bridge">
       <div class="card-bg" style="background-color: #8A7E76;"></div>
       <div class="card-info">
@@ -342,7 +360,7 @@
       <span class="card-pip">Bridge</span>
     </a>
 
-    <!-- NYC Book -->
+    <!-- ✏️ CARD 4: NYC Book ─────────────────────────────── -->
     <a href="nyc-transportation.html" class="card card-nyc">
       <div class="card-bg" style="background-color: #3A4E5E;"></div>
       <div class="card-info">
@@ -352,7 +370,7 @@
       <span class="card-pip">NYC Research</span>
     </a>
 
-    <!-- Drawings -->
+    <!-- ✏️ CARD 5: Drawings ─────────────────────────────── -->
     <a href="drawings.html" class="card card-drawings">
       <div class="card-bg" style="background-color: #B0A088;"></div>
       <div class="card-info">
@@ -362,7 +380,7 @@
       <span class="card-pip">Drawing</span>
     </a>
 
-    <!-- Rocketry -->
+    <!-- ✏️ CARD 6: Rocketry ─────────────────────────────── -->
     <a href="rocketry.html" class="card card-rocketry">
       <div class="card-bg" style="background-color: #3A4A6A;"></div>
       <div class="card-info">
@@ -372,7 +390,7 @@
       <span class="card-pip">Rocketry</span>
     </a>
 
-    <!-- CycleMapper -->
+    <!-- ✏️ CARD 7: CycleMapper ──────────────────────────── -->
     <a href="cyclemapper.html" class="card card-cycle">
       <div class="card-bg" style="background-color: #556070;"></div>
       <div class="card-info">
@@ -385,17 +403,43 @@
 
   </div>
 </section>
+<!-- END WORK GRID ═══════════════════════════════════════════════ -->
 
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ABOUT SECTION — the paragraph block at the bottom
+     ✏️ EDIT: the heading (currently "About Liam" — can be anything)
+     ✏️ EDIT: each <p> paragraph — write these in your own voice
+               This is the main place to describe who you are.
+               Add or remove <p> blocks as needed.
+═══════════════════════════════════════════════════════════════ -->
 <section id="about">
   <h2 class="about-heading">About<br>Liam</h2>
   <div class="about-body">
-    <p>I'm a junior at Dartmouth's Thayer School of Engineering studying mechanical engineering with a focus on human-centered design and physical product development. I start from the human problem — understanding who is affected and why before thinking about solutions.</p>
-    <p>My work spans agricultural tool design, municipal infrastructure consulting, and urban systems research. I build things that solve real problems for real people.</p>
-    <p>Alongside engineering I study acting, anthropology, theatre, and urban geography — disciplines that shape how I observe problems and communicate across disciplines.</p>
-    <p>Dual US–Irish citizen. Based in Hanover, NH. Available in New York City.</p>
+
+    <!-- ✏️ PARAGRAPH 1: what you do and how you think ──── -->
+    <p>I'm a junior at Dartmouth's Thayer School of Engineering studying mechanical engineering and product design. I approach problems from the human side first — understanding who is affected and why before thinking about solutions. I build things that solve real problems for real people.</p>
+
+    <!-- ✏️ PARAGRAPH 2: range of work ──────────────────── -->
+    <p>My work spans agricultural tool design, municipal infrastructure consulting, structural engineering, and urban systems research. I've designed a varroa mite treatment device that's now independently funded, consulted for a Slovak mayor on water infrastructure decisions affecting 3,600 people, and competed internationally as a steeplechase athlete.</p>
+
+    <!-- ✏️ PARAGRAPH 3: outside engineering ────────────── -->
+    <p>Alongside engineering I study acting, anthropology, theatre, and urban geography — disciplines that shape how I observe problems and communicate across disciplines. I'm a USATF All-American and Irish U20 national competitor.</p>
+
+    <!-- ✏️ PARAGRAPH 4: where you're based / available ── -->
+    <p>Dual US–Irish citizen, originally from the Bronx, NY. Based in Hanover, NH. Available in New York City.</p>
+
   </div>
 </section>
+<!-- END ABOUT ═══════════════════════════════════════════════════ -->
 
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER — bottom of page
+     ✏️ EDIT: href="mailto:..." = your email
+     ✏️ EDIT: href="https://www.linkedin..." = your LinkedIn URL
+     ✏️ EDIT: © 2026 Liam O'Neill = your name and year
+═══════════════════════════════════════════════════════════════ -->
 <footer>
   <nav class="footer-links">
     <a href="mailto:oneill.m.liam@gmail.com">Email</a>
@@ -403,6 +447,7 @@
   </nav>
   <small>© 2026 Liam O'Neill</small>
 </footer>
+<!-- END FOOTER ══════════════════════════════════════════════════ -->
 
 </body>
 </html>
