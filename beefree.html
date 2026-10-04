@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreeBee — Liam O'Neill</title>
+  <meta name="description" content="FreeBee is a handheld varroa mite powdered sugar applicator for beehives — designed, built, and field-validated by Liam O'Neill.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #F7F7F5;
+      --ink:    #1C1C1A;
+      --muted:  #7A7A76;
+      --amber:  #C07818;
+      --white:  #FFFFFF;
+      --serif:  'Cormorant Garamond', Georgia, serif;
+      --sans:   'DM Sans', system-ui, sans-serif;
+      --max:    1080px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Nav ─────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(247, 247, 245, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .nav-home {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-back {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--ink); }
+
+    /* ─── Hero ────────────────────────────────────────────── */
+    .hero {
+      padding: 140px 40px 0;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.10em;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.65;
+      margin-bottom: 48px;
+    }
+
+    /* ─── Hero image ──────────────────────────────────────── */
+    /*
+      TO ADD YOUR HERO PHOTO:
+      Replace the background-color below with:
+      background-image: url('img/beefree-hero.jpg');
+      and keep the background-color as a fallback.
+    */
+    .hero-img {
+      width: 100%;
+      height: 520px;
+      background-color: #C8A055;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 0;
+    }
+
+    /* ─── Meta strip ──────────────────────────────────────── */
+    .meta-strip {
+      border-top: 1px solid rgba(28,28,26,0.10);
+      border-bottom: 1px solid rgba(28,28,26,0.10);
+      padding: 28px 40px;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .meta-item {}
+    .meta-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .meta-value {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    /* ─── Content sections ────────────────────────────────── */
+    .content {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 40px 100px;
+    }
+
+    .section {
+      padding-top: 72px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.10em;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .section-heading {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(30px, 3.5vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 24px;
+      max-width: 640px;
+    }
+
+    .body-text {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.80;
+      color: var(--ink);
+      max-width: 640px;
+    }
+
+    .body-text p + p { margin-top: 16px; }
+
+    /* ─── Two-column layout ───────────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .two-col-wide {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* ─── Image blocks ────────────────────────────────────── */
+    /*
+      TO ADD PHOTOS to any image block:
+      Replace background-color with background-image: url('img/filename.jpg');
+      Suggested filenames are in the comments above each block.
+    */
+    .img-block {
+      width: 100%;
+      background-color: #D4B87A;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .img-block.tall   { height: 420px; }
+    .img-block.medium { height: 300px; }
+    .img-block.short  { height: 220px; }
+
+    .img-caption {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* ─── Stats row ───────────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+      border: 1px solid rgba(28,28,26,0.10);
+    }
+
+    .stat {
+      padding: 32px 28px;
+      background: var(--white);
+      border-right: 1px solid rgba(28,28,26,0.10);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 52px;
+      font-weight: 300;
+      color: var(--amber);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    .stat-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ─── Materials grid ──────────────────────────────────── */
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-top: 28px;
+      border: 1px solid rgba(28,28,26,0.10);
+    }
+
+    .material-item {
+      padding: 20px 24px;
+      background: var(--white);
+      border-right: 1px solid rgba(28,28,26,0.10);
+      border-bottom: 1px solid rgba(28,28,26,0.10);
+    }
+
+    .material-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .material-use {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ─── Divider ─────────────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(28,28,26,0.10);
+      margin-top: 72px;
+    }
+
+    /* ─── Next project nav ────────────────────────────────── */
+    .project-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 40px 56px;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .project-nav a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .project-nav a:hover { color: var(--ink); }
+
+    .project-nav .next {
+      text-align: right;
+    }
+
+    .project-nav-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .project-nav-title {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    /* ─── Footer ──────────────────────────────────────────── */
+    footer {
+      padding: 24px 40px 40px;
+      max-width: var(--max);
+      margin: 0 auto;
+      border-top: 1px solid rgba(28,28,26,0.10);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links { display: flex; gap: 24px; }
+
+    .footer-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--ink); }
+    footer small { font-size: 12px; color: var(--muted); }
+
+    /* ─── Mobile ──────────────────────────────────────────── */
+    @media (max-width: 700px) {
+      nav { padding: 16px 20px; }
+      .hero { padding: 110px 20px 0; }
+      .hero-img { height: 280px; }
+      .meta-strip { grid-template-columns: repeat(2, 1fr); padding: 24px 20px; }
+      .content { padding: 0 20px 80px; }
+      .two-col, .two-col-wide { grid-template-columns: 1fr; gap: 32px; }
+      .stats-row { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(28,28,26,0.10); }
+      .materials-grid { grid-template-columns: 1fr; }
+      .material-item { border-right: none; }
+      .project-nav { padding: 32px 20px 48px; }
+      footer { flex-direction: column; gap: 12px; align-items: flex-start; padding: 24px 20px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Nav ──────────────────────────────────────────────── -->
+<nav>
+  <a href="/" class="nav-home">Liam O'Neill</a>
+  <a href="/" class="nav-back">← All Work</a>
+</nav>
+
+<!-- ─── Hero ─────────────────────────────────────────────── -->
+<header class="hero">
+  <p class="hero-eyebrow">Product Design · Agricultural Tools · 2025–Present</p>
+  <h1 class="hero-title">FreeBee</h1>
+  <p class="hero-sub">A handheld powdered sugar applicator for organic varroa mite treatment in beehives — designed, built, and field-validated at Dartmouth's O-Farm.</p>
+</header>
+
+<!-- Hero image — replace background-color with: background-image: url('img/beefree-hero.jpg'); -->
+<div class="hero-img" style="background-color: #C8A055;"></div>
+
+<!-- ─── Meta strip ────────────────────────────────────────── -->
+<div class="meta-strip">
+  <div class="meta-item">
+    <p class="meta-label">Role</p>
+    <p class="meta-value">Founder &amp; Lead Engineer</p>
+  </div>
+  <div class="meta-item">
+    <p class="meta-label">Origin</p>
+    <p class="meta-value">ENGS 21, Dartmouth Thayer</p>
+  </div>
+  <div class="meta-item">
+    <p class="meta-label">Status</p>
+    <p class="meta-value">In Progress — Sayles Grant Funded</p>
+  </div>
+  <div class="meta-item">
+    <p class="meta-label">Tested</p>
+    <p class="meta-value">Dartmouth O-Farm, Hanover NH</p>
+  </div>
+</div>
+
+<!-- ─── Content ───────────────────────────────────────────── -->
+<main class="content">
+
+  <!-- The Problem -->
+  <section class="section">
+    <p class="section-label">The Problem</p>
+    <div class="two-col-wide">
+      <div>
+        <h2 class="section-heading">Beekeepers had no good tools for organic mite treatment.</h2>
+        <div class="body-text">
+          <p>Varroa destructor is the leading cause of managed honeybee colony collapse worldwide. Left untreated, infestations kill a colony within two years. Treatment options fall into two categories: chemical miticides, which are effective but leave residues in wax and honey, and organic methods — primarily powdered sugar application — which are residue-free but rely on improvised tools or manual dusting that result in inconsistent dosing and poor coverage.</p>
+          <p>No purpose-built, handheld organic mite applicator existed on the market. Beekeepers improvising with modified hand-cranked dusters or shaker jars couldn't control dosage, struggled with even distribution across frames, and added significant time to an already labor-intensive practice.</p>
+          <p>The gap wasn't a design problem anyone had solved — it was one nobody had noticed was worth solving. I noticed it by watching beekeepers work.</p>
+        </div>
+      </div>
+      <!-- Photo: img/beefree-problem.jpg — beekeeper at work, or varroa mite closeup -->
+      <div>
+        <div class="img-block tall" style="background-color: #B8924A;"></div>
+        <p class="img-caption">Varroa mite treatment at Dartmouth's O-Farm</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- My Role -->
+  <section class="section">
+    <p class="section-label">My Role</p>
+    <h2 class="section-heading">From class project to independent development.</h2>
+    <div class="body-text">
+      <p>FreeBee originated in ENGS 21 — Engineering Problem Solving and Design — at Dartmouth's Thayer School of Engineering. I led the mechanism design and the dispensing system architecture throughout the class, working with a team of four. After the course ended, I continued the project independently, retaining full IP ownership and pursuing grant funding to develop it toward a market-ready product.</p>
+      <p>I was awarded the Thomas D. Sayles Research Grant ($2,000) from Dartmouth in fall 2026 to continue development — one of a small number of undergraduate research grants awarded each term. The current development push focuses on integrating electronics from the ground up: a motor-driven sifting mechanism, brushless fan system, and a unified housing designed for field durability and ease of cleaning.</p>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section">
+    <p class="section-label">Process</p>
+    <h2 class="section-heading">Start with the beekeeper. Design backward from there.</h2>
+    <div class="body-text">
+      <p>The first step wasn't sketching — it was watching. Beekeepers need both hands free during a hive inspection. Treatment takes place between frames with limited clearance. The device needs to be operable with gloves on, easy to reload, and resistant to the humid, propolis-coated environment inside a hive.</p>
+      <p>Those constraints defined the design brief more precisely than any specification document. From there the process moved through concept sketches, rough foam and cardboard models to test grip and proportion, early 3D-printed prototypes to validate mechanism geometry, and iterative testing to tune dosage rate and coverage.</p>
+    </div>
+
+    <!-- Photo row: 2 process images side by side -->
+    <div class="two-col" style="margin-top: 32px;">
+      <!-- Photo: img/beefree-sketch.jpg — early sketches or concept development -->
+      <div>
+        <div class="img-block medium" style="background-color: #C4A068;"></div>
+        <p class="img-caption">Early concept sketches and mechanism exploration</p>
+      </div>
+      <!-- Photo: img/beefree-prototype.jpg — early prototype, breadboard version -->
+      <div>
+        <div class="img-block medium" style="background-color: #B8924A;"></div>
+        <p class="img-caption">Initial prototypes testing geometry and dispensing mechanism</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="section">
+    <p class="section-label">Results</p>
+    <h2 class="section-heading">Field-validated at Dartmouth's O-Farm.</h2>
+    <div class="body-text">
+      <p>The final prototype was tested at Dartmouth's Organic Farm with working beehives. Key metrics from the validation session:</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <p class="stat-number">92.75%</p>
+        <p class="stat-label">Dosage Accuracy</p>
+        <p class="stat-sub">Consistent across multiple application cycles</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">11s</p>
+        <p class="stat-label">Application Time</p>
+        <p class="stat-sub">Per full hive frame treatment</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">3.69%</p>
+        <p class="stat-label">Distribution Variance</p>
+        <p class="stat-sub">Even coverage across the frame surface</p>
+      </div>
+    </div>
+
+    <!-- Photo: img/beefree-testing.jpg — testing at O-Farm -->
+    <div style="margin-top: 32px;">
+      <div class="img-block medium" style="background-color: #B8924A;"></div>
+      <p class="img-caption">Field validation at Dartmouth's O-Farm, Hanover NH</p>
+    </div>
+  </section>
+
+  <!-- Materials -->
+  <section class="section">
+    <p class="section-label">Materials &amp; Construction</p>
+    <h2 class="section-heading">Designed for the field.</h2>
+    <div class="body-text">
+      <p>Material selection was driven by the operating environment: humid, propolis-coated interior of an active hive, requiring durability, chemical resistance, and field repairability. The current development iteration uses:</p>
+    </div>
+
+    <div class="materials-grid">
+      <div class="material-item">
+        <p class="material-name">PETG</p>
+        <p class="material-use">Primary housing — chemical-resistant, food-safe, impact-tolerant</p>
+      </div>
+      <div class="material-item">
+        <p class="material-name">TPU</p>
+        <p class="material-use">Vibration-isolation mounts — absorbs motor vibration, maintains seal integrity</p>
+      </div>
+      <div class="material-item">
+        <p class="material-name">PETG-CF</p>
+        <p class="material-use">Internal structural brackets — carbon-fiber reinforced for stiffness at reduced weight</p>
+      </div>
+      <div class="material-item">
+        <p class="material-name">PA-CF</p>
+        <p class="material-use">High-wear components — nylon-carbon composite for parts under repeated mechanical stress</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Next -->
+  <section class="section">
+    <p class="section-label">What's Next</p>
+    <h2 class="section-heading">From validated prototype to field-ready product.</h2>
+    <div class="two-col-wide">
+      <div class="body-text">
+        <p>The Sayles Research Grant is funding a full electronics integration push in fall 2026. The planned bring-up sequence moves from a basic button/LED circuit through motor control, brushless fan integration via ESC, full power management, and a state machine driving the complete device logic — all within a unified housing designed for ease of field cleaning and repair.</p>
+        <p>Longer term, I'm exploring a modular snap-together 3D-printable hive frame in multiple sizes for different hive types — designed for distributed self-fabrication by beekeepers as an access and equity design choice, with STL files shared freely so anyone with a printer can fabricate at cost.</p>
+        <p>FreeBee targets the roughly 3.8 million managed honeybee colonies in the United States (USDA Census of Agriculture), with a primary focus on small-scale and hobbyist beekeepers who represent the majority of operations and who currently have the fewest purpose-built tools available to them.</p>
+      </div>
+      <!-- Photo: img/beefree-next.jpg — current development state, parts, or electronics -->
+      <div>
+        <div class="img-block tall" style="background-color: #C8A055;"></div>
+        <p class="img-caption">Current development — fall 2026 electronics integration</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<hr class="divider" style="max-width: 1080px; margin: 0 auto;">
+
+<!-- ─── Project nav ────────────────────────────────────────── -->
+<div class="project-nav">
+  <a href="/">
+    <p class="project-nav-label">← Back</p>
+    <p class="project-nav-title">All Work</p>
+  </a>
+  <a href="lozorno.html" class="next">
+    <p class="project-nav-label">Next →</p>
+    <p class="project-nav-title">Lozorno Water Systems</p>
+  </a>
+</div>
+
+<!-- ─── Footer ───────────────────────────────────────────── -->
+<footer>
+  <nav class="footer-links">
+    <a href="mailto:oneill.m.liam@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/liam-o-neill-b923a3294/" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+  <small>© 2026 Liam O'Neill</small>
+</footer>
+
+</body>
+</html>
