@@ -83,7 +83,6 @@
       letter-spacing: -0.02em;
     }
 
-    /* ─── Download button ─────────────────────────────────── */
     .download-btn {
       display: inline-block;
       font-size: 13px;
@@ -103,27 +102,63 @@
       border-color: var(--ink);
     }
 
-    /* ─── PDF wrapper ─────────────────────────────────────── */
+    /* ─── PDF wrapper + clip ──────────────────────────────── */
     .pdf-wrapper {
       max-width: 900px;
       margin: 0 auto;
-      padding: 0 40px 80px;
+      padding: 0 40px 0;
     }
 
     /*
-      The iframe hides the toolbar with #toolbar=0&navpanes=0
-      Height is set to 1130px — enough to show a full US Letter
-      resume (8.5×11in) without an internal scroll bar.
-      If your resume is cut off at the bottom, increase this number.
+      .pdf-clip hides the black bar the browser renders at the
+      bottom of the PDF embed. It clips the iframe at 1095px
+      while the iframe itself is taller (1155px). If the bottom
+      of your resume content is cut off, increase BOTH numbers
+      by the same amount.
     */
+    .pdf-clip {
+      overflow: hidden;
+      height: 1095px;
+    }
+
     .pdf-embed {
       width: 100%;
-      height: 1130px;
+      height: 1155px;
       border: none;
       display: block;
       background: var(--white);
-      overflow: hidden;
     }
+
+    /* ─── Back to home nav ────────────────────────────────── */
+    .page-nav {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 40px 56px;
+      border-top: 1px solid rgba(28,28,26,0.10);
+    }
+
+    .page-nav a {
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .page-nav-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .page-nav-title {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--ink);
+      transition: color 0.2s;
+    }
+
+    .page-nav a:hover .page-nav-title { color: var(--muted); }
 
     /* ─── Footer ──────────────────────────────────────────── */
     footer {
@@ -151,14 +186,11 @@
     /* ─── Mobile ──────────────────────────────────────────── */
     @media (max-width: 700px) {
       nav { padding: 16px 20px; }
-      .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-        padding: 100px 20px 24px;
-      }
-      .pdf-wrapper { padding: 0 0 60px; }
-      .pdf-embed { height: 500px; overflow: auto; }
+      .page-header { flex-direction: column; align-items: flex-start; gap: 20px; padding: 100px 20px 24px; }
+      .pdf-wrapper { padding: 0; }
+      .pdf-clip { height: 500px; }
+      .pdf-embed { height: 560px; }
+      .page-nav { padding: 40px 20px 48px; }
       footer { flex-direction: column; gap: 12px; align-items: flex-start; padding: 24px 20px 40px; }
     }
   </style>
@@ -172,25 +204,29 @@
 
 <div class="page-header">
   <h1 class="page-title">Resume</h1>
-  <!-- Download button — points directly to resume.pdf in your repo root -->
   <a href="resume.pdf" download="Liam_ONeill_Resume.pdf" class="download-btn">Download PDF ↓</a>
 </div>
 
 <div class="pdf-wrapper">
-  <!--
-    #toolbar=0  — hides the PDF toolbar (works in Chrome and Edge)
-    #navpanes=0 — hides the side panels
-    #view=FitH  — fits the PDF to the width of the viewer
-    scrolling="no" — prevents scroll bar inside the frame
-  -->
-  <iframe
-    src="resume.pdf#toolbar=0&navpanes=0&view=FitH"
-    class="pdf-embed"
-    scrolling="no"
-    title="Liam O'Neill Resume">
-  </iframe>
+  <div class="pdf-clip">
+    <iframe
+      src="resume.pdf#toolbar=0&navpanes=0&view=FitH"
+      class="pdf-embed"
+      scrolling="no"
+      title="Liam O'Neill Resume">
+    </iframe>
+  </div>
 </div>
 
+<!-- ─── Back to home ──────────────────────────────────────── -->
+<div class="page-nav">
+  <a href="/">
+    <p class="page-nav-label">← Back to</p>
+    <p class="page-nav-title">All Work</p>
+  </a>
+</div>
+
+<!-- ─── Footer ───────────────────────────────────────────── -->
 <footer>
   <nav class="footer-links">
     <a href="mailto:oneill.m.liam@gmail.com">Email</a>
