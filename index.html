@@ -3,19 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- ✏️ EDIT: BROWSER TAB TITLE ─────────────────────────────────────────
-       This shows in the browser tab and in Google search results.
-       Not visible on the page itself.
-  ──────────────────────────────────────────────────────────────────────── -->
-  <title>Liam O'Neill — Mechanical Engineer</title>
-
-  <!-- ✏️ EDIT: GOOGLE DESCRIPTION ────────────────────────────────────────
-       One or two sentences shown under your link in Google search results.
-       Not visible on the page itself.
-  ──────────────────────────────────────────────────────────────────────── -->
+  <title>Liam O'Neill — Design Engineer</title>
   <meta name="description" content="Liam O'Neill is a junior at Dartmouth's Thayer School of Engineering working at the intersection of mechanical engineering and human-centered design.">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
@@ -47,6 +36,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ─── Nav ─────────────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -81,12 +71,23 @@
 
     .nav-links a:hover { color: var(--ink); }
 
+    /* ─── Hero ────────────────────────────────────────────── */
     .hero {
-      padding: 168px 40px 72px;
+      padding: 148px 40px 0;
       max-width: 1080px;
       margin: 0 auto;
     }
 
+    /* Name + photo row */
+    .hero-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 64px; /* breathing room between name and about */
+    }
+
+    /* ✏️ EDIT: the big name */
     .hero-name {
       font-family: var(--serif);
       font-style: italic;
@@ -95,23 +96,57 @@
       line-height: 0.95;
       letter-spacing: -0.025em;
       color: var(--ink);
-      margin-bottom: 28px;
     }
 
-    .hero-tag {
-  font-size: 15px;
-  font-weight: 300;
-  color: var(--muted);
-  max-width: 580px;
-  line-height: 1.6;
-}
+    /*
+      ✏️ PHOTO PLACEHOLDER
+      When you have a photo:
+      1. Upload it to your GitHub repo as img/headshot.jpg
+      2. Add to the .hero-photo div below:
+         style="background-image: url('img/headshot.jpg'); background-color: #D4C4B0;"
+    */
+    .hero-photo {
+      width: 200px;
+      height: 200px;
+      background-size: cover;
+      background-position: center top;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
 
-    .hero-tag b { color: var(--ink); font-weight: 400; }
-
-    #work {
-      padding: 0 40px 100px;
+    /* ─── About block ─────────────────────────────────────── */
+    .about-block {
+      padding: 48px 40px 64px;
       max-width: 1080px;
       margin: 0 auto;
+      border-top: 1px solid rgba(28,28,26,0.10);
+    }
+
+    /* ✏️ EDIT: the "About Me" heading */
+    .about-heading {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.10em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* ✏️ EDIT: the about me paragraph — spans full width */
+    .about-text {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.80;
+      max-width: 100%;
+    }
+
+    /* ─── Work ────────────────────────────────────────────── */
+    #work {
+      padding: 0 40px 60px;
+      max-width: 1080px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(28,28,26,0.10);
     }
 
     .eyebrow {
@@ -121,8 +156,10 @@
       color: var(--muted);
       text-transform: uppercase;
       margin-bottom: 20px;
+      padding-top: 48px;
     }
 
+    /* ─── Grid ────────────────────────────────────────────── */
     .grid {
       display: grid;
       grid-template-columns: 62fr 38fr;
@@ -211,31 +248,44 @@
       align-self: flex-start;
     }
 
-    #about {
-      padding: 80px 40px;
+    /* ─── Resume Button ───────────────────────────────────── */
+    .resume-block {
       max-width: 1080px;
       margin: 0 auto;
+      padding: 48px 40px 80px;
       border-top: 1px solid rgba(28,28,26,0.10);
-      display: grid;
-      grid-template-columns: 2fr 3fr;
-      gap: 60px;
-      align-items: start;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .about-heading {
-      font-family: var(--serif);
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(36px, 4vw, 56px);
-      line-height: 1.05;
-      letter-spacing: -0.015em;
+    .resume-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
     }
 
-    .about-body { font-size: 15px; font-weight: 300; line-height: 1.80; }
-    .about-body p + p { margin-top: 14px; }
+    .resume-btn {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid rgba(28,28,26,0.25);
+      padding: 10px 24px;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
 
+    .resume-btn:hover {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+
+    /* ─── Footer ──────────────────────────────────────────── */
     footer {
-      padding: 36px 40px 56px;
+      padding: 28px 40px 48px;
       max-width: 1080px;
       margin: 0 auto;
       border-top: 1px solid rgba(28,28,26,0.10);
@@ -257,11 +307,25 @@
     .footer-links a:hover { color: var(--ink); }
     footer small { font-size: 12px; color: var(--muted); }
 
+    /* ─── Mobile ──────────────────────────────────────────── */
     @media (max-width: 700px) {
       nav { padding: 16px 20px; }
       .nav-links { gap: 18px; }
-      .hero { padding: 130px 20px 56px; }
-      #work { padding: 0 20px 80px; }
+      .hero { padding: 110px 20px 0; }
+
+      .hero-top {
+        grid-template-columns: 1fr;
+        margin-bottom: 40px;
+      }
+
+      .hero-photo {
+        width: 120px;
+        height: 120px;
+        order: -1;
+      }
+
+      .about-block { padding: 40px 20px 48px; }
+      #work { padding: 0 20px 60px; }
 
       .grid {
         grid-template-columns: 1fr;
@@ -272,8 +336,19 @@
       .card-nyc, .card-drawings, .card-rocketry,
       .card-cycle { grid-area: unset; }
 
-      #about { grid-template-columns: 1fr; gap: 20px; padding: 60px 20px; }
-      footer { flex-direction: column; gap: 12px; align-items: flex-start; padding: 32px 20px 48px; }
+      .resume-block {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+        padding: 40px 20px 60px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 24px 20px 40px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -283,46 +358,51 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     NAV BAR — top of every page
-     ✏️ EDIT: "Liam O'Neill" = your name as it appears top-left
-     ✏️ EDIT: the three <a> links = nav items (Work / About / Contact)
-     ✏️ EDIT: href="mailto:..." = your email address
-═══════════════════════════════════════════════════════════════ -->
+<!-- ─── Nav ──────────────────────────────────────────────── -->
 <nav>
   <a href="/" class="nav-home">Liam O'Neill</a>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
-    <li><a href="#about">About</a></li>
+    <li><a href="resume.html">Resume</a></li>
     <li><a href="mailto:oneill.m.liam@gmail.com">Contact</a></li>
   </ul>
 </nav>
 
 
-<!-- ═══════════════════════════════════════════════════════════════
-     HERO — the first thing visitors see
-     ✏️ EDIT: the big name (shown in large italic font)
-     ✏️ EDIT: the tagline — paragraph below the name
-═══════════════════════════════════════════════════════════════ -->
+<!-- ─── Hero ─────────────────────────────────────────────── -->
 <header class="hero">
-  <h1 class="hero-name">Liam<br>O'Neill</h1>
-  <p class="hero-tag">
-    Liam is a junior studying mechanical engineering at Dartmouth College.<br>
-    He aims to work at the intersection of engineering and human-centered design and cares deeply about improving the lives of others and the world as a whole with his projects.
-  </p>
+  <div class="hero-top">
+
+    <!-- ✏️ EDIT: your name -->
+    <h1 class="hero-name">Liam<br>O'Neill</h1>
+
+    <!--
+      ✏️ PHOTO: when you have a headshot ready:
+      1. Upload it to GitHub as img/headshot.jpg
+      2. Change the style below to:
+         style="background-image: url('img/headshot.jpg'); background-color: #D4C4B0;"
+    -->
+    <div class="hero-photo" style="background-color: #D4C4B0;"></div>
+
+  </div>
 </header>
-<!-- END HERO ════════════════════════════════════════════════════ -->
 
 
-<!-- ═══════════════════════════════════════════════════════════════
-     WORK GRID — your project cards
-     Each card has two editable parts:
-       ✏️ EDIT: card-cat  = the small category text shown on hover
-       ✏️ EDIT: card-title = the project name shown on hover
-       ✏️ EDIT: card-pip  = the small label always visible (bottom-left)
-     To add a photo: find the card's .card-bg div and add:
-       style="background-image: url('img/filename.jpg'); background-color: #fallback;"
-═══════════════════════════════════════════════════════════════ -->
+<!-- ─── About ────────────────────────────────────────────── -->
+<section class="about-block">
+
+  <!-- ✏️ EDIT: the "About Me" heading label -->
+  <p class="about-heading">About Me</p>
+
+  <!-- ✏️ EDIT: your about me paragraph — spans full width -->
+  <p class="about-text">
+    I am a junior majoring in mechanical engineering at Dartmouth College. I have been passionate about tinkering and building for as long as I can remember. While I value the technical craft, I am motivated by the people and the environment central to the issue. I believe that the most novel solutions come more from how a problem is approached than the mechanics of the solution. I have pursued this with my courses, studying a wide range of areas from anthropology and theatre to geography and social justice within cities. I am energized and passionate about working on a variety of issues, from designing a tool to help beekeepers protect their colonies, to working rail-side on train works planning in Ireland, to co-authoring an infrastructure study commissioned by the mayor of a Slovakian town. I want to make a positive impact in the world and I see engineering as my way to do so.
+  </p>
+
+</section>
+
+
+<!-- ─── Work ─────────────────────────────────────────────── -->
 <section id="work">
   <p class="eyebrow">Selected Work</p>
   <div class="grid">
@@ -401,41 +481,16 @@
 
   </div>
 </section>
-<!-- END WORK GRID ═══════════════════════════════════════════════ -->
 
 
-<!-- ═══════════════════════════════════════════════════════════════
-     ABOUT SECTION — the paragraph block at the bottom
-     ✏️ EDIT: the heading (currently "About Liam" — can be anything)
-     ✏️ EDIT: each <p> paragraph — write these in your own voice
-               This is the main place to describe who you are.
-               Add or remove <p> blocks as needed.
-═══════════════════════════════════════════════════════════════ -->
-<section id="about">
-  <h2 class="about-heading">About<br>Liam</h2>
-  <div class="about-body">
-
-    <!-- ✏️ PARAGRAPH 1: what you do and how you think ──── -->
-    <p>I'm a junior at Dartmouth's Thayer School of Engineering studying mechanical engineering and product design. I approach problems from the human side first — understanding who is affected and why before thinking about solutions. I build things that solve real problems for real people.</p>
-
-    <!-- ✏️ PARAGRAPH 2: range of work ──────────────────── -->
-    <p>My work spans agricultural tool design, municipal infrastructure consulting, structural engineering, and urban systems research. I've designed a varroa mite treatment device that's now independently funded, consulted for a Slovak mayor on water infrastructure decisions affecting 3,600 people, and competed internationally as a steeplechase athlete.</p>
-
-    <!-- ✏️ PARAGRAPH 3: outside engineering ────────────── -->
-    <p>Alongside engineering I study acting, anthropology, theatre, and urban geography — disciplines that shape how I observe problems and communicate across disciplines. I'm a USATF All-American and Irish U20 national competitor.</p>
+<!-- ─── Resume Button ────────────────────────────────────── -->
+<div class="resume-block">
+  <p class="resume-label">View or download my resume</p>
+  <a href="resume.html" class="resume-btn">Resume →</a>
+</div>
 
 
-  </div>
-</section>
-<!-- END ABOUT ═══════════════════════════════════════════════════ -->
-
-
-<!-- ═══════════════════════════════════════════════════════════════
-     FOOTER — bottom of page
-     ✏️ EDIT: href="mailto:..." = your email
-     ✏️ EDIT: href="https://www.linkedin..." = your LinkedIn URL
-     ✏️ EDIT: © 2026 Liam O'Neill = your name and year
-═══════════════════════════════════════════════════════════════ -->
+<!-- ─── Footer ───────────────────────────────────────────── -->
 <footer>
   <nav class="footer-links">
     <a href="mailto:oneill.m.liam@gmail.com">Email</a>
@@ -443,7 +498,6 @@
   </nav>
   <small>© 2026 Liam O'Neill</small>
 </footer>
-<!-- END FOOTER ══════════════════════════════════════════════════ -->
 
 </body>
 </html>
