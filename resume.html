@@ -64,7 +64,7 @@
 
     .nav-back:hover { color: var(--ink); }
 
-    /* ─── Header ──────────────────────────────────────────── */
+    /* ─── Page header ─────────────────────────────────────── */
     .page-header {
       padding: 120px 40px 32px;
       max-width: 900px;
@@ -103,35 +103,26 @@
       border-color: var(--ink);
     }
 
-    /* ─── PDF viewer ──────────────────────────────────────── */
-    /*
-      TO SET UP:
-      1. Export your resume as a PDF
-      2. Name it: resume.pdf
-      3. Upload it to a folder called "files" in your GitHub repo
-         (same way you uploaded index.html — Add file → Upload files,
-          but first type "files/" in the path so it goes in that folder)
-      That's it — it will appear automatically here.
-    */
+    /* ─── PDF wrapper ─────────────────────────────────────── */
     .pdf-wrapper {
       max-width: 900px;
       margin: 0 auto;
       padding: 0 40px 80px;
     }
 
+    /*
+      The iframe hides the toolbar with #toolbar=0&navpanes=0
+      Height is set to 1130px — enough to show a full US Letter
+      resume (8.5×11in) without an internal scroll bar.
+      If your resume is cut off at the bottom, increase this number.
+    */
     .pdf-embed {
       width: 100%;
-      height: 1000px;
+      height: 1130px;
       border: none;
+      display: block;
       background: var(--white);
-    }
-
-    .pdf-fallback {
-      display: none;
-      text-align: center;
-      padding: 60px 20px;
-      font-size: 15px;
-      color: var(--muted);
+      overflow: hidden;
     }
 
     /* ─── Footer ──────────────────────────────────────────── */
@@ -166,57 +157,40 @@
         gap: 20px;
         padding: 100px 20px 24px;
       }
-      .pdf-wrapper { padding: 0 20px 60px; }
-      .pdf-embed { height: 600px; }
+      .pdf-wrapper { padding: 0 0 60px; }
+      .pdf-embed { height: 500px; overflow: auto; }
       footer { flex-direction: column; gap: 12px; align-items: flex-start; padding: 24px 20px 40px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ─── Nav ──────────────────────────────────────────────── -->
 <nav>
   <a href="/" class="nav-home">Liam O'Neill</a>
   <a href="/" class="nav-back">← Back</a>
 </nav>
 
-<!-- ─── Header ───────────────────────────────────────────── -->
 <div class="page-header">
   <h1 class="page-title">Resume</h1>
-  <!-- ✏️ EDIT: this download link points to your PDF file -->
-  <a href="files/resume.pdf" download="Liam_ONeill_Resume.pdf" class="download-btn">Download PDF ↓</a>
+  <!-- Download button — points directly to resume.pdf in your repo root -->
+  <a href="resume.pdf" download="Liam_ONeill_Resume.pdf" class="download-btn">Download PDF ↓</a>
 </div>
 
-<!-- ─── PDF Viewer ────────────────────────────────────────── -->
 <div class="pdf-wrapper">
   <!--
-    ✏️ TO MAKE THIS WORK:
-    1. Export your resume as a PDF (in Word: File → Save As → PDF)
-    2. Name the file: resume.pdf
-    3. In GitHub: Add file → Upload files
-       Before uploading, type "files/" at the start of the file path
-       so it saves as files/resume.pdf
-    4. Refresh this page — your resume will appear here automatically
+    #toolbar=0  — hides the PDF toolbar (works in Chrome and Edge)
+    #navpanes=0 — hides the side panels
+    #view=FitH  — fits the PDF to the width of the viewer
+    scrolling="no" — prevents scroll bar inside the frame
   -->
-  <object
-    data="resume.pdf"
-    type="application/pdf"
+  <iframe
+    src="resume.pdf#toolbar=0&navpanes=0&view=FitH"
     class="pdf-embed"
-    aria-label="Liam O'Neill Resume PDF">
-    <iframe
-      src="resume.pdf"
-      class="pdf-embed"
-      title="Liam O'Neill Resume">
-      <div class="pdf-fallback">
-        <p>PDF preview not available in your browser.</p>
-        <br>
-        <a href="resume.pdf" download="Liam_ONeill_Resume.pdf" class="download-btn">Download PDF ↓</a>
-      </div>
-    </iframe>
-  </object>
+    scrolling="no"
+    title="Liam O'Neill Resume">
+  </iframe>
 </div>
 
-<!-- ─── Footer ───────────────────────────────────────────── -->
 <footer>
   <nav class="footer-links">
     <a href="mailto:oneill.m.liam@gmail.com">Email</a>
