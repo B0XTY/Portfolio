@@ -36,7 +36,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── Nav ─────────────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -71,23 +70,21 @@
 
     .nav-links a:hover { color: var(--ink); }
 
-    /* ─── Hero ────────────────────────────────────────────── */
     .hero {
-      padding: 148px 40px 0;
+      padding: 80px 40px 0;
       max-width: 1080px;
       margin: 0 auto;
     }
 
-    /* Name + photo row */
+    /* ✏️ Name left, photo right — tight gap, photo is big */
     .hero-top {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 48px;
+      grid-template-columns: 1fr 420px;
+      gap: 24px;
       align-items: center;
-      margin-bottom: 64px; /* breathing room between name and about */
+      margin-bottom: 64px;
     }
 
-    /* ✏️ EDIT: the big name */
     .hero-name {
       font-family: var(--serif);
       font-style: italic;
@@ -99,22 +96,24 @@
     }
 
     /*
-      ✏️ PHOTO PLACEHOLDER
-      When you have a photo:
-      1. Upload it to your GitHub repo as img/headshot.jpg
-      2. Add to the .hero-photo div below:
-         style="background-image: url('img/headshot.jpg'); background-color: #D4C4B0;"
+      ✏️ PHOTO
+      background-position: center 40% focuses on upper body/face.
+      Increase % to pan down into the image, decrease to pan up.
+
+      TO ADD YOUR PHOTO:
+      1. Rename IMG_7537.jpeg → headshot.jpg
+      2. Upload headshot.jpg to GitHub root (Add file → Upload files)
+      3. Change the style on .hero-photo div in the HTML below to:
+         style="background-image: url('headshot.jpg'); background-color: #D4C4B0;"
     */
     .hero-photo {
-      width: 200px;
-      height: 200px;
+      width: 460px;
+      height: 480px;
       background-size: cover;
-      background-position: center top;
-      border-radius: 4px;
+      background-position: center 55%;
       flex-shrink: 0;
     }
 
-    /* ─── About block ─────────────────────────────────────── */
     .about-block {
       padding: 48px 40px 64px;
       max-width: 1080px;
@@ -122,7 +121,6 @@
       border-top: 1px solid rgba(28,28,26,0.10);
     }
 
-    /* ✏️ EDIT: the "About Me" heading */
     .about-heading {
       font-size: 11px;
       font-weight: 500;
@@ -132,7 +130,6 @@
       margin-bottom: 20px;
     }
 
-    /* ✏️ EDIT: the about me paragraph — spans full width */
     .about-text {
       font-size: 16px;
       font-weight: 300;
@@ -141,7 +138,6 @@
       max-width: 100%;
     }
 
-    /* ─── Work ────────────────────────────────────────────── */
     #work {
       padding: 0 40px 60px;
       max-width: 1080px;
@@ -159,7 +155,6 @@
       padding-top: 48px;
     }
 
-    /* ─── Grid ────────────────────────────────────────────── */
     .grid {
       display: grid;
       grid-template-columns: 62fr 38fr;
@@ -248,7 +243,6 @@
       align-self: flex-start;
     }
 
-    /* ─── Resume Button ───────────────────────────────────── */
     .resume-block {
       max-width: 1080px;
       margin: 0 auto;
@@ -283,7 +277,6 @@
       border-color: var(--ink);
     }
 
-    /* ─── Footer ──────────────────────────────────────────── */
     footer {
       padding: 28px 40px 48px;
       max-width: 1080px;
@@ -307,7 +300,6 @@
     .footer-links a:hover { color: var(--ink); }
     footer small { font-size: 12px; color: var(--muted); }
 
-    /* ─── Mobile ──────────────────────────────────────────── */
     @media (max-width: 700px) {
       nav { padding: 16px 20px; }
       .nav-links { gap: 18px; }
@@ -315,13 +307,14 @@
 
       .hero-top {
         grid-template-columns: 1fr;
+        gap: 32px;
         margin-bottom: 40px;
       }
 
       .hero-photo {
-        width: 120px;
-        height: 120px;
-        order: -1;
+        width: 100%;
+        height: 340px;
+        background-position: center 35%;
       }
 
       .about-block { padding: 40px 20px 48px; }
@@ -336,19 +329,8 @@
       .card-nyc, .card-drawings, .card-rocketry,
       .card-cycle { grid-area: unset; }
 
-      .resume-block {
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-        padding: 40px 20px 60px;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 12px;
-        align-items: flex-start;
-        padding: 24px 20px 40px;
-      }
+      .resume-block { flex-direction: column; gap: 20px; align-items: flex-start; padding: 40px 20px 60px; }
+      footer { flex-direction: column; gap: 12px; align-items: flex-start; padding: 24px 20px 40px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -358,7 +340,6 @@
 </head>
 <body>
 
-<!-- ─── Nav ──────────────────────────────────────────────── -->
 <nav>
   <a href="/" class="nav-home">Liam O'Neill</a>
   <ul class="nav-links">
@@ -368,46 +349,30 @@
   </ul>
 </nav>
 
-
-<!-- ─── Hero ─────────────────────────────────────────────── -->
 <header class="hero">
   <div class="hero-top">
-
-    <!-- ✏️ EDIT: your name -->
     <h1 class="hero-name">Liam<br>O'Neill</h1>
 
     <!--
-      ✏️ PHOTO: when you have a headshot ready:
-      1. Upload it to GitHub as img/headshot.jpg
-      2. Change the style below to:
-         style="background-image: url('img/headshot.jpg'); background-color: #D4C4B0;"
+      ✏️ PHOTO: once headshot.jpg is uploaded to GitHub root,
+      change this to:
+      style="background-image: url('headshot.jpg'); background-color: #D4C4B0;"
     -->
-    <div class="hero-photo" style="background-color: #D4C4B0;"></div>
-
+    <div class="hero-photo" style="background-image: url('headshot.jpg'); background-color: #D4C4B0;"></div>
   </div>
 </header>
 
-
-<!-- ─── About ────────────────────────────────────────────── -->
 <section class="about-block">
-
-  <!-- ✏️ EDIT: the "About Me" heading label -->
   <p class="about-heading">About Me</p>
-
-  <!-- ✏️ EDIT: your about me paragraph — spans full width -->
   <p class="about-text">
     I am a junior majoring in mechanical engineering at Dartmouth College. I have been passionate about tinkering and building for as long as I can remember. While I value the technical craft, I am motivated by the people and the environment central to the issue. I believe that the most novel solutions come more from how a problem is approached rather than the mechanics of the solution. I have pursued this through my courses, studying a wide range of disciplines from anthropology and theatre to geography and film. I am energized and passionate about working on a variety of issues, from designing a tool to help beekeepers protect their colonies, to working rail-side on train works planning in Ireland, to co-authoring an infrastructure study commissioned by the mayor of a Slovakian town. I want to make a positive impact in the world and I see engineering as my way to do so.
   </p>
-
 </section>
 
-
-<!-- ─── Work ─────────────────────────────────────────────── -->
 <section id="work">
   <p class="eyebrow">Selected Work</p>
   <div class="grid">
 
-    <!-- ✏️ CARD 1: FreeBee ──────────────────────────────── -->
     <a href="beefree.html" class="card card-beefree">
       <div class="card-bg" style="background-color: #C8A055;"></div>
       <div class="card-info">
@@ -418,7 +383,6 @@
       <span class="card-pip">FreeBee</span>
     </a>
 
-    <!-- ✏️ CARD 2: Lozorno ──────────────────────────────── -->
     <a href="lozorno.html" class="card card-lozorno">
       <div class="card-bg" style="background-color: #4E7282;"></div>
       <div class="card-info">
@@ -428,7 +392,6 @@
       <span class="card-pip">Lozorno</span>
     </a>
 
-    <!-- ✏️ CARD 3: Bridge ───────────────────────────────── -->
     <a href="bridge.html" class="card card-bridge">
       <div class="card-bg" style="background-color: #8A7E76;"></div>
       <div class="card-info">
@@ -438,7 +401,6 @@
       <span class="card-pip">Bridge</span>
     </a>
 
-    <!-- ✏️ CARD 4: NYC Book ─────────────────────────────── -->
     <a href="nyc-transportation.html" class="card card-nyc">
       <div class="card-bg" style="background-color: #3A4E5E;"></div>
       <div class="card-info">
@@ -448,7 +410,6 @@
       <span class="card-pip">NYC Research</span>
     </a>
 
-    <!-- ✏️ CARD 5: Drawings ─────────────────────────────── -->
     <a href="drawings.html" class="card card-drawings">
       <div class="card-bg" style="background-color: #B0A088;"></div>
       <div class="card-info">
@@ -458,7 +419,6 @@
       <span class="card-pip">Drawing</span>
     </a>
 
-    <!-- ✏️ CARD 6: Rocketry ─────────────────────────────── -->
     <a href="rocketry.html" class="card card-rocketry">
       <div class="card-bg" style="background-color: #3A4A6A;"></div>
       <div class="card-info">
@@ -468,7 +428,6 @@
       <span class="card-pip">Rocketry</span>
     </a>
 
-    <!-- ✏️ CARD 7: CycleMapper ──────────────────────────── -->
     <a href="cyclemapper.html" class="card card-cycle">
       <div class="card-bg" style="background-color: #556070;"></div>
       <div class="card-info">
@@ -482,15 +441,11 @@
   </div>
 </section>
 
-
-<!-- ─── Resume Button ────────────────────────────────────── -->
 <div class="resume-block">
   <p class="resume-label">View or download my resume</p>
   <a href="resume.html" class="resume-btn">Resume →</a>
 </div>
 
-
-<!-- ─── Footer ───────────────────────────────────────────── -->
 <footer>
   <nav class="footer-links">
     <a href="mailto:oneill.m.liam@gmail.com">Email</a>
