@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FreeBee — Liam O'Neill</title>
+  <title>FreeBee | Liam O'Neill</title>
   <meta name="description" content="FreeBee is a handheld powdered-sugar applicator for non-chemical varroa mite treatment in beehives, designed and validated by Liam O'Neill at Dartmouth.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,6 +29,18 @@
     .hero-media { width:100%; height:62vh; min-height:360px; max-height:640px; overflow:hidden; background:#C8A055; margin-top:52px; }
     .hero-media img { width:100%; height:100%; object-fit:cover; display:block; }
 
+    /* ME label overlays the hero text area instead of taking its own row */
+    .hero-wrap { position:relative; }
+    .me-tag {
+      position:absolute;
+      top:10px;
+      left:65%;
+      transform:translateX(-50%);
+      width:clamp(90px, 8vw, 140px);
+      height:auto;
+      z-index:2;
+    }
+
     .hero { max-width:var(--max); margin:0 auto; padding:56px 40px 0; }
     .hero-eyebrow { font-size:11px; font-weight:500; letter-spacing:.10em; color:var(--amber); text-transform:uppercase; margin-bottom:14px; }
     .hero-title { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(46px,7vw,84px); line-height:0.95; letter-spacing:-0.02em; margin-bottom:20px; }
@@ -47,16 +59,19 @@
     .img-block { width:100%; background:#D4B87A; background-size:cover; background-position:center; }
     .img-block.tall { height:420px; }
     .img-block.medium { height:300px; }
-    /* Shows the whole photo instead of cropping it */
-    .img-block.fit { background-size:contain; background-repeat:no-repeat; }
-        .img-block.fit-wide {
-      width: 100%;
-      aspect-ratio: 16 / 9;
+    .img-caption { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; }
+
+    /* Varroa photo: extends past the text column to near the right edge of the screen, taller shape */
+    .problem-media {
+      margin-right: calc(-1 * max(0px, 50vw - var(--max) / 2));
+      margin-top: 36px;
+    }
+    .img-block.mite {
+      aspect-ratio: 4 / 3;
       background-size: cover;
-      background-position: center;
+      background-position: 35% center;
       background-repeat: no-repeat;
     }
-    .img-caption { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; }
 
     /* Stats */
     .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:30px; border:1px solid rgba(28,28,26,0.10); }
@@ -81,31 +96,28 @@
     .footer-links a:hover { color:var(--ink); }
     footer small { font-size:12px; color:var(--muted); }
 
+    /* Narrower screens: ME label stacks above the title instead of beside it */
+    @media (max-width:1100px) {
+      .me-tag {
+        position:static;
+        transform:none;
+        display:block;
+        width:90px;
+        margin:10px 0 0 calc(65% - 45px);
+      }
+    }
+
     @media (max-width:700px) {
       nav { padding:14px 20px; }
       .hero-media { height:46vh; margin-top:48px; }
       .hero { padding:40px 20px 0; }
       .content { padding:0 20px 80px; }
       .two-col-wide { grid-template-columns:1fr; gap:28px; }
+      .problem-media { margin-top:0; }
       .stats-row { grid-template-columns:1fr; }
       .stat { border-right:none; border-bottom:1px solid rgba(28,28,26,0.10); }
       .project-nav { padding:32px 20px 48px; }
       footer { flex-direction:column; gap:12px; align-items:flex-start; padding:24px 20px 40px; }
-      .me-tag img { margin-right:14% !important; }
-    }
-
-       .me-tag {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 8px 40px 0;
-      display: flex;
-      justify-content: flex-end;
-    }
-    .me-tag img {
-      width: clamp(90px, 9vw, 140px);
-      height: auto;
-      margin-right: 30%;
-      display: block;
     }
   </style>
 </head>
@@ -115,20 +127,20 @@
   <a href="/" class="nav-home">Liam O'Neill</a>
   <a href="/" class="nav-back">All Work</a>
 </nav>
+
 <!-- GIF is the first thing on the page -->
 <div class="hero-media">
   <img src="freebee-spray.gif" alt="FreeBee treating a live hive at Dartmouth's Organic Farm">
 </div>
 
-<div class="me-tag">
-  <img src="me-label.png" alt="The beekeeper is me">
+<div class="hero-wrap">
+  <img class="me-tag" src="me-label.png" alt="The beekeeper is me">
+  <header class="hero">
+    <p class="hero-eyebrow">Product Design · Agricultural Tools · 2025–Present</p>
+    <h1 class="hero-title">FreeBee</h1>
+    <p class="hero-sub">A handheld device that treats beehives for varroa mites using powdered sugar. No chemicals and no need to open the hive.</p>
+  </header>
 </div>
-
-<header class="hero">
-  <p class="hero-eyebrow">Product Design · Agricultural Tools · 2025–Present</p>
-  <h1 class="hero-title">FreeBee</h1>
-  <p class="hero-sub">A handheld device that treats beehives for varroa mites using powdered sugar. No chemicals and no need to open the hive.</p>
-</header>
 
 <main class="content">
 
@@ -140,12 +152,12 @@
         <h2 class="section-heading">Varroa mites are collapsing honeybee colonies, and the chemicals that fought them are failing.</h2>
         <div class="body-text">
           <p><em>Varroa destructor</em> is a parasitic mite that feeds on honeybees and spreads deadly viruses between them. It is the leading cause of colony collapse and resulted in the loss of over 60% of U.S. commercial colonies from 2024 to 2025, roughly 1.7 million hives and $600 million in damage (USDA-ARS, 2025).</p>
-          <p>Beekeepers fight the mite with the miticide amitraz, but it is losing effect. USDA found amitraz-resistance markers in essentially 100% of mites sampled from collapsed colonies. A non-chemical treatment is desperately needed to protect the pollinators responsible for 1/3 of U.S food supply.</p>
+          <p>Beekeepers fight the mite with the miticide amitraz, but it is losing effect. USDA found amitraz-resistance markers in essentially 100% of mites sampled from collapsed colonies. A non-chemical treatment is desperately needed to protect the pollinators responsible for 1/3 of U.S. food supply.</p>
         </div>
       </div>
-      <!-- Photo: img/beefree-varroa.jpg (varroa mite on a bee) -->
-     <div>
-         <div class="img-block fit-wide" style="background-image:url('mite-bee.jpg');"></div>
+      <!-- Varroa photo: mite-bee.jpg -->
+      <div class="problem-media">
+        <div class="img-block mite" style="background-image:url('mite-bee.jpg');"></div>
         <p class="img-caption">A honeybee parasitized by <em>Varroa destructor</em> (circled)</p>
       </div>
     </div>
@@ -167,7 +179,7 @@
     <p class="section-label">Built &amp; Tested</p>
     <h2 class="section-heading">A first prototype to prove the treatment.</h2>
     <div class="body-text">
-      <p>The first prototype had one job: quickly deliver a measured dose of powdered sugar into a hive, spreading it evenly without opening the hive. The dose is administered through a modified queen excluder with the internal wall removed and a removeable opening, so it fits any standard hive. A motorized sifter de-clumps and meters the sugar, dropping into a distribution chamber powered by a motorized blower to distribute the sugar across the brood box.</p>
+      <p>The first prototype had one job: quickly deliver a measured dose of powdered sugar into a hive, spreading it evenly without opening the hive. The dose is administered through a modified queen excluder with the internal wall removed and a removable opening, so it fits any standard hive. A motorized sifter de-clumps and meters the sugar, dropping into a distribution chamber powered by a motorized blower to distribute the sugar across the brood box.</p>
     </div>
 
     <div class="stats-row">
@@ -193,7 +205,7 @@
       <p>On a live colony at a local apiary, a single treatment produced a 1,700% increase in mite drop, with no observed swarming or disruption to the hive.</p>
     </div>
 
-    <!-- Photo: img/beefree-ofarm.jpg (O-farm live hive test) -->
+    <!-- Photo: beefree-ofarm.jpg (O-farm live hive test), not uploaded yet -->
     <div style="margin-top:28px;">
       <div class="img-block medium" style="background-color:#B8924A;"></div>
       <p class="img-caption">Live-hive field test at Dartmouth's Organic Farm, Hanover NH</p>
@@ -207,9 +219,9 @@
     <div class="two-col-wide">
       <div class="body-text">
         <p>The first prototype proved the treatment works. The current version, funded by a Sayles Research Grant from Dartmouth's Ethics Institute, is about making it real.</p>
-        <p>I am building it from the ground up using raw electronics, a single-button control system, a motor-driven sifter and fan, and a consolidated 3D-printed housing. The goal is a sturdy, fully integrated, battery-powered device a beekeeper can run rely on for daily use. This device is designed to hold or beat the same application time and even coverage, and will be tested in the lab and nearby organic farms and apiaries.</p>
+        <p>I am building it from the ground up using raw electronics, a single-button control system, a motor-driven sifter and fan, and a consolidated 3D-printed housing. The goal is a sturdy, fully integrated, battery-powered device a beekeeper can rely on for daily use. This device is designed to hold or beat the same application time and even coverage, and will be tested in the lab and nearby organic farms and apiaries.</p>
       </div>
-      <!-- Photo: img/beefree-v2.jpg (v2 parts / CAD / workbench) -->
+      <!-- Photo: beefree-v2.jpg (v2 parts / CAD / workbench), not uploaded yet -->
       <div>
         <div class="img-block tall" style="background-color:#C8A055;"></div>
         <p class="img-caption">Version two, in development</p>
