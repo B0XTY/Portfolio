@@ -47,6 +47,8 @@
     .img-block { width:100%; background:#D4B87A; background-size:cover; background-position:center; }
     .img-block.tall { height:420px; }
     .img-block.medium { height:300px; }
+    /* Shows the whole photo instead of cropping it */
+    .img-block.fit { background-size:contain; background-repeat:no-repeat; }
     .img-caption { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; }
 
     /* Stats */
@@ -82,25 +84,27 @@
       .stat { border-right:none; border-bottom:1px solid rgba(28,28,26,0.10); }
       .project-nav { padding:32px 20px 48px; }
       footer { flex-direction:column; gap:12px; align-items:flex-start; padding:24px 20px 40px; }
+      .me-tag img { margin-right:14% !important; }
     }
 
-  .me-tag {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 40px;
-  display: flex;
-  justify-content: flex-end;
-  height: 0;                /* takes no vertical space, so it won't push the title down */
-  position: relative;
-  z-index: 2;
-}
-.me-tag img {
-  width: clamp(90px, 9vw, 140px);
-  height: auto;
-  margin-top: 10px;
-  margin-right: 24%;        /* bigger number = further left; tuned to center on your torso */
-}
-    
+    /* ME label: sits just below the GIF, floats right, takes no height so the title stays put */
+    .me-tag {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      z-index: 2;
+      height: 0;
+      overflow: visible;
+    }
+    .me-tag img {
+      width: clamp(90px, 9vw, 140px);
+      height: auto;
+      margin-top: 12px;
+      margin-right: 30%;
+    }
   </style>
 </head>
 <body>
@@ -139,7 +143,7 @@
       </div>
       <!-- Photo: img/beefree-varroa.jpg (varroa mite on a bee) -->
      <div>
-        <div class="img-block tall" style="background-color:#B8924A; background-image:url('mite-bee.jpg');"></div>
+        <div class="img-block tall fit" style="background-color:#B8924A; background-image:url('mite-bee.jpg');"></div>
         <p class="img-caption">A honeybee parasitized by <em>Varroa destructor</em> (circled)</p>
       </div>
     </div>
