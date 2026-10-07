@@ -49,6 +49,13 @@
     .img-block.medium { height:300px; }
     /* Shows the whole photo instead of cropping it */
     .img-block.fit { background-size:contain; background-repeat:no-repeat; }
+        .img-block.fit-wide {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
     .img-caption { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; }
 
     /* Stats */
@@ -87,23 +94,18 @@
       .me-tag img { margin-right:14% !important; }
     }
 
-    /* ME label: sits just below the GIF, floats right, takes no height so the title stays put */
-    .me-tag {
+       .me-tag {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 0 40px;
+      padding: 8px 40px 0;
       display: flex;
       justify-content: flex-end;
-      position: relative;
-      z-index: 2;
-      height: 0;
-      overflow: visible;
     }
     .me-tag img {
       width: clamp(90px, 9vw, 140px);
       height: auto;
-      margin-top: 12px;
       margin-right: 30%;
+      display: block;
     }
   </style>
 </head>
@@ -143,7 +145,7 @@
       </div>
       <!-- Photo: img/beefree-varroa.jpg (varroa mite on a bee) -->
      <div>
-        <div class="img-block tall fit" style="background-color:#B8924A; background-image:url('mite-bee.jpg');"></div>
+         <div class="img-block fit-wide" style="background-image:url('mite-bee.jpg');"></div>
         <p class="img-caption">A honeybee parasitized by <em>Varroa destructor</em> (circled)</p>
       </div>
     </div>
