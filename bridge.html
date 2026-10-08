@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birch Truss Bridge | Liam O'Neill</title>
+  <meta name="description" content="A birch-plywood truss bridge designed, analyzed, fabricated, and tested to failure by Liam O'Neill at Dartmouth, holding roughly 1,700 times its own weight.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:#F7F7F5; --ink:#1C1C1A; --muted:#7A7A76; --accent:#8A7E76; --white:#FFFFFF;
+      --serif:'Cormorant Garamond', Georgia, serif; --sans:'DM Sans', system-ui, sans-serif; --max:1080px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:15px; font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+
+    /* Nav */
+    nav { position:fixed; top:0; left:0; right:0; z-index:50; display:flex; justify-content:space-between; align-items:center; padding:16px 40px; background:rgba(247,247,245,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+    .nav-home { font-size:14px; font-weight:500; color:var(--ink); text-decoration:none; }
+    .nav-back { font-size:13px; font-weight:400; color:var(--muted); text-decoration:none; transition:color .2s; }
+    .nav-back:hover { color:var(--ink); }
+
+    /* Hero media */
+    .hero-media { width:100%; height:62vh; min-height:360px; max-height:640px; overflow:hidden; background:#8A7E76; margin-top:52px; }
+    .hero-media img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    .hero { max-width:var(--max); margin:0 auto; padding:56px 40px 0; }
+    .hero-eyebrow { font-size:11px; font-weight:500; letter-spacing:.10em; color:var(--accent); text-transform:uppercase; margin-bottom:14px; }
+    .hero-title { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(46px,7vw,84px); line-height:0.95; letter-spacing:-0.02em; margin-bottom:20px; }
+    .hero-sub { font-size:17px; font-weight:300; color:var(--muted); max-width:620px; line-height:1.6; }
+
+    /* Content */
+    .content { max-width:var(--max); margin:0 auto; padding:0 40px 100px; }
+    .section { padding-top:64px; }
+    .section-label { font-size:11px; font-weight:500; letter-spacing:.10em; color:var(--accent); text-transform:uppercase; margin-bottom:16px; }
+    .section-heading { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(28px,3.3vw,40px); line-height:1.12; letter-spacing:-0.015em; margin-bottom:22px; max-width:680px; }
+    .body-text { font-size:15.5px; font-weight:300; line-height:1.78; color:var(--ink); max-width:660px; }
+    .body-text p + p { margin-top:16px; }
+
+    /* Process gallery */
+    .process-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:28px 24px; margin-top:8px; }
+    .process-item .img-block { width:100%; aspect-ratio:4 / 3; background:#B3ABA3; background-size:cover; background-position:center; background-repeat:no-repeat; }
+    .process-step { font-size:11px; font-weight:500; letter-spacing:.10em; color:var(--accent); text-transform:uppercase; margin-top:12px; }
+    .process-cap { font-size:13.5px; color:var(--ink); margin-top:4px; line-height:1.5; }
+
+    /* Full-width figure */
+    .figure-wide { margin-top:40px; }
+    .figure-wide .img-block { width:100%; aspect-ratio:16 / 9; background:#B3ABA3; background-size:cover; background-position:center; }
+    .img-caption { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; }
+
+    /* Two-up (before / after) */
+    .two-up { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:40px; }
+    .two-up .img-block { width:100%; aspect-ratio:4 / 3; background:#B3ABA3; background-size:cover; background-position:center; }
+
+    /* Stats */
+    .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:30px; border:1px solid rgba(28,28,26,0.10); }
+    .stat { padding:30px 26px; background:var(--white); border-right:1px solid rgba(28,28,26,0.10); }
+    .stat:last-child { border-right:none; }
+    .stat-number { font-family:var(--serif); font-style:italic; font-size:50px; font-weight:300; color:var(--accent); line-height:1; letter-spacing:-0.02em; margin-bottom:8px; }
+    .stat-label { font-size:13px; font-weight:400; }
+    .stat-sub { font-size:12px; color:var(--muted); margin-top:4px; }
+
+    /* Divider / nav / footer */
+    .divider { border:none; border-top:1px solid rgba(28,28,26,0.10); margin-top:72px; }
+    .project-nav { display:flex; justify-content:space-between; align-items:center; padding:40px 40px 56px; max-width:var(--max); margin:0 auto; }
+    .project-nav a { text-decoration:none; }
+    .project-nav .next { text-align:right; }
+    .project-nav-label { font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+    .project-nav-title { font-size:15px; font-weight:400; color:var(--ink); transition:color .2s; }
+    .project-nav a:hover .project-nav-title { color:var(--accent); }
+    footer { padding:24px 40px 40px; max-width:var(--max); margin:0 auto; border-top:1px solid rgba(28,28,26,0.10); display:flex; justify-content:space-between; align-items:center; }
+    .footer-links { display:flex; gap:24px; }
+    .footer-links a { font-size:13px; font-weight:400; color:var(--muted); text-decoration:none; transition:color .2s; }
+    .footer-links a:hover { color:var(--ink); }
+    footer small { font-size:12px; color:var(--muted); }
+
+    @media (max-width:700px) {
+      nav { padding:14px 20px; }
+      .hero-media { height:46vh; margin-top:48px; }
+      .hero { padding:40px 20px 0; }
+      .content { padding:0 20px 80px; }
+      .process-grid { grid-template-columns:1fr; gap:24px; }
+      .two-up { grid-template-columns:1fr; }
+      .stats-row { grid-template-columns:1fr; }
+      .stat { border-right:none; border-bottom:1px solid rgba(28,28,26,0.10); }
+      .project-nav { padding:32px 20px 48px; }
+      footer { flex-direction:column; gap:12px; align-items:flex-start; padding:24px 20px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-home">Liam O'Neill</a>
+  <a href="/" class="nav-back">All Work</a>
+</nav>
+
+<!-- Hero: finished bridge before testing -->
+<div class="hero-media">
+  <img src="bridge-hero.jpg" alt="The finished birch-plywood truss bridge before testing">
+</div>
+
+<header class="hero">
+  <p class="hero-eyebrow">Structural Design &amp; Fabrication · Summer 2026</p>
+  <h1 class="hero-title">Birch Truss Bridge</h1>
+  <p class="hero-sub">Designing, analyzing, and building a birch-plywood truss for the highest strength-to-weight, then testing it to failure.</p>
+</header>
+
+<main class="content">
+
+  <!-- Intro -->
+  <section class="section">
+    <p class="section-label">The Project</p>
+    <h2 class="section-heading">The strongest bridge for the least material.</h2>
+    <div class="body-text">
+      <p>The goal was simple to state and hard to do: design a birch-plywood truss that carries as much load as possible for as little weight as possible, then build it and test it to destruction. The design went through the full engineering process, from first sketches to a physical bridge loaded until it broke.</p>
+      <p>The finished truss weighed 0.6 kg and held 10.38 kN, roughly 1,700 times its own weight, the third-highest load in the class.</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <p class="stat-number">1,700×</p>
+        <p class="stat-label">Its own weight held</p>
+        <p class="stat-sub">10.38 kN carried on a 0.6 kg bridge</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">0.6 kg</p>
+        <p class="stat-label">Total mass</p>
+        <p class="stat-sub">Birch plywood, laser-cut and assembled</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">3rd</p>
+        <p class="stat-label">Highest load in the class</p>
+        <p class="stat-sub">Tested to failure on an Instron</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section">
+    <p class="section-label">The Process</p>
+    <h2 class="section-heading">From sketch to a tested structure.</h2>
+    <div class="body-text">
+      <p>I worked through every stage of the design: researching truss forms and sketching concepts, modeling the geometry in SAP2000, developing the parts in SolidWorks under finite element analysis, then laser-cutting and hand-assembling the final bridge.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-item">
+        <div class="img-block" style="background-image:url('bridge-sketch.jpg');"></div>
+        <p class="process-step">01 · Sketch</p>
+        <p class="process-cap">Researching truss forms and sketching concepts by hand.</p>
+      </div>
+      <div class="process-item">
+        <div class="img-block" style="background-image:url('bridge-sap2000.jpg');"></div>
+        <p class="process-step">02 · Analyze</p>
+        <p class="process-cap">Modeling the geometry and member forces in SAP2000.</p>
+      </div>
+      <div class="process-item">
+        <div class="img-block" style="background-image:url('bridge-fea.jpg');"></div>
+        <p class="process-step">03 · Refine</p>
+        <p class="process-cap">Developing the design in SolidWorks under finite element analysis.</p>
+      </div>
+      <div class="process-item">
+        <div class="img-block" style="background-image:url('bridge-lasercut.jpg');"></div>
+        <p class="process-step">04 · Fabricate</p>
+        <p class="process-cap">Laser-cutting the members from birch plywood.</p>
+      </div>
+    </div>
+
+    <div class="figure-wide">
+      <div class="img-block" style="background-image:url('bridge-assembly.jpg');"></div>
+      <p class="img-caption">Hand-assembling the final truss</p>
+    </div>
+  </section>
+
+  <!-- Test -->
+  <section class="section">
+    <p class="section-label">The Test</p>
+    <h2 class="section-heading">Loaded until it broke.</h2>
+    <div class="body-text">
+      <p>The bridge was loaded on an Instron testing machine until failure. It carried 10.38 kN before giving way, and the break came at the crossmembers beneath the load points rather than in the truss itself, meaning the main structure never reached its own limit and the true capacity was higher still.</p>
+    </div>
+
+    <div class="two-up">
+      <div class="img-block" style="background-image:url('bridge-before.jpg');"></div>
+      <div class="img-block" style="background-image:url('bridge-damage.jpg');"></div>
+    </div>
+    <p class="img-caption">Before testing, and the failure at the crossmembers after</p>
+  </section>
+
+</main>
+
+<hr class="divider" style="max-width:1080px; margin:0 auto;">
+
+<div class="project-nav">
+  <a href="lozorno.html">
+    <p class="project-nav-label">Back</p>
+    <p class="project-nav-title">Lozorno Water Systems</p>
+  </a>
+  <a href="nyc-transportation.html" class="next">
+    <p class="project-nav-label">Next</p>
+    <p class="project-nav-title">NYC Transportation &amp; Equity</p>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="mailto:oneill.m.liam@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/liam-o-neill-b923a3294/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+  <small>© 2026 Liam O'Neill</small>
+</footer>
+
+</body>
+</html>
