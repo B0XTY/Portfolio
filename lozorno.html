@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lozorno Water Systems | Liam O'Neill</title>
+  <meta name="description" content="A drinking water capacity analysis for Lozorno, Slovakia, carried out by Liam O'Neill as part of Dartmouth's ENGS 45 Sustainable Urban Systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:#F7F7F5; --ink:#1C1C1A; --muted:#7A7A76; --accent:#4E7282; --white:#FFFFFF;
+      --serif:'Cormorant Garamond', Georgia, serif; --sans:'DM Sans', system-ui, sans-serif; --max:1080px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:15px; font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+
+    /* Nav */
+    nav { position:fixed; top:0; left:0; right:0; z-index:50; display:flex; justify-content:space-between; align-items:center; padding:16px 40px; background:rgba(247,247,245,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); }
+    .nav-home { font-size:14px; font-weight:500; color:var(--ink); text-decoration:none; }
+    .nav-back { font-size:13px; font-weight:400; color:var(--muted); text-decoration:none; transition:color .2s; }
+    .nav-back:hover { color:var(--ink); }
+
+    /* Hero */
+    .hero-media { width:100%; height:62vh; min-height:360px; max-height:640px; overflow:hidden; background:#4E7282; margin-top:52px; }
+    .hero-media img { width:100%; height:100%; object-fit:cover; display:block; }
+    .hero { max-width:var(--max); margin:0 auto; padding:56px 40px 0; }
+    .hero-eyebrow { font-size:11px; font-weight:500; letter-spacing:.10em; color:var(--accent); text-transform:uppercase; margin-bottom:14px; }
+    .hero-title { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(46px,7vw,84px); line-height:0.95; letter-spacing:-0.02em; margin-bottom:20px; }
+    .hero-sub { font-size:17px; font-weight:300; color:var(--muted); max-width:620px; line-height:1.6; }
+
+    /* Content */
+    .content { max-width:var(--max); margin:0 auto; padding:0 40px 100px; }
+    .section { padding-top:64px; }
+    .section-label { font-size:11px; font-weight:500; letter-spacing:.10em; color:var(--accent); text-transform:uppercase; margin-bottom:16px; }
+    .section-heading { font-family:var(--serif); font-style:italic; font-weight:300; font-size:clamp(28px,3.3vw,40px); line-height:1.12; letter-spacing:-0.015em; margin-bottom:22px; max-width:680px; }
+    .body-text { font-size:15.5px; font-weight:300; line-height:1.78; color:var(--ink); max-width:660px; }
+    .body-text p + p { margin-top:16px; }
+
+    .two-col-wide { display:grid; grid-template-columns:3fr 2fr; gap:56px; align-items:start; }
+
+    .img-block { width:100%; background:#7E99A5; background-size:cover; background-position:center; background-repeat:no-repeat; }
+    .img-block.photo { aspect-ratio:4 / 3; }
+    .img-block.chart { aspect-ratio:16 / 9; background-size:contain; background-color:var(--white); }
+    .img-caption { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; }
+
+    .media-bleed { margin-right: calc(-1 * max(0px, 50vw - var(--max) / 2)); }
+    .problem-media { margin-top:36px; }
+
+    /* Stats */
+    .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:30px; border:1px solid rgba(28,28,26,0.10); }
+    .stat { padding:30px 26px; background:var(--white); border-right:1px solid rgba(28,28,26,0.10); }
+    .stat:last-child { border-right:none; }
+    .stat-number { font-family:var(--serif); font-style:italic; font-size:50px; font-weight:300; color:var(--accent); line-height:1; letter-spacing:-0.02em; margin-bottom:8px; }
+    .stat-label { font-size:13px; font-weight:400; }
+    .stat-sub { font-size:12px; color:var(--muted); margin-top:4px; }
+    .results-note { font-size:12px; color:var(--muted); font-style:italic; margin-top:12px; }
+
+    /* Data table */
+    .table-wrap { margin-top:36px; overflow-x:auto; }
+    .table-title { font-size:13px; font-weight:500; margin-bottom:10px; }
+    table { width:100%; border-collapse:collapse; background:var(--white); border:1px solid rgba(28,28,26,0.10); font-size:14px; }
+    th, td { padding:12px 16px; text-align:right; border-bottom:1px solid rgba(28,28,26,0.08); white-space:nowrap; }
+    th:first-child, td:first-child { text-align:left; }
+    th { font-size:11px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+    td { font-weight:300; }
+    tr:last-child td { border-bottom:none; }
+
+    .chart-block { margin-top:36px; }
+
+    /* Interventions */
+    .interventions { margin-top:28px; display:grid; gap:2px; border:1px solid rgba(28,28,26,0.10); }
+    .intervention { background:var(--white); padding:24px 26px; display:grid; grid-template-columns:auto 1fr auto; gap:20px; align-items:baseline; }
+    .intervention-num { font-family:var(--serif); font-style:italic; font-size:28px; color:var(--accent); line-height:1; }
+    .intervention-title { font-size:15px; font-weight:500; margin-bottom:4px; }
+    .intervention-desc { font-size:14px; font-weight:300; color:var(--muted); line-height:1.6; max-width:560px; }
+    .intervention-cost { font-size:13px; font-weight:400; color:var(--ink); white-space:nowrap; }
+
+    .plan-block { margin-top:48px; }
+
+    /* Divider / nav / footer */
+    .divider { border:none; border-top:1px solid rgba(28,28,26,0.10); margin-top:72px; }
+    .project-nav { display:flex; justify-content:space-between; align-items:center; padding:40px 40px 56px; max-width:var(--max); margin:0 auto; }
+    .project-nav a { text-decoration:none; }
+    .project-nav .next { text-align:right; }
+    .project-nav-label { font-size:11px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; }
+    .project-nav-title { font-size:15px; font-weight:400; color:var(--ink); transition:color .2s; }
+    .project-nav a:hover .project-nav-title { color:var(--accent); }
+    footer { padding:24px 40px 40px; max-width:var(--max); margin:0 auto; border-top:1px solid rgba(28,28,26,0.10); display:flex; justify-content:space-between; align-items:center; }
+    .footer-links { display:flex; gap:24px; }
+    .footer-links a { font-size:13px; font-weight:400; color:var(--muted); text-decoration:none; transition:color .2s; }
+    .footer-links a:hover { color:var(--ink); }
+    footer small { font-size:12px; color:var(--muted); }
+
+    @media (max-width:700px) {
+      nav { padding:14px 20px; }
+      .hero-media { height:46vh; margin-top:48px; }
+      .hero { padding:40px 20px 0; }
+      .content { padding:0 20px 80px; }
+      .two-col-wide { grid-template-columns:1fr; gap:28px; }
+      .problem-media { margin-top:0; }
+      .stats-row { grid-template-columns:1fr; }
+      .stat { border-right:none; border-bottom:1px solid rgba(28,28,26,0.10); }
+      .intervention { grid-template-columns:1fr; gap:6px; }
+      th, td { padding:10px 12px; }
+      .project-nav { padding:32px 20px 48px; }
+      footer { flex-direction:column; gap:12px; align-items:flex-start; padding:24px 20px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-home">Liam O'Neill</a>
+  <a href="/" class="nav-back">All Work</a>
+</nav>
+
+<!-- Hero image: lozorno-hero.jpg (the town photo from your title slide works well) -->
+<div class="hero-media">
+  <img src="lozorno-hero.jpg" alt="The town of Lozorno, Slovakia">
+</div>
+
+<header class="hero">
+  <p class="hero-eyebrow">Infrastructure Analysis · Slovakia · Spring 2026</p>
+  <h1 class="hero-title">Lozorno Water Systems</h1>
+  <p class="hero-sub">Can a fast-growing Slovak town's drinking water system keep up? An analysis carried out with the town's mayor and water operator.</p>
+</header>
+
+<main class="content">
+
+  <!-- 1. The Problem -->
+  <section class="section">
+    <p class="section-label">The Problem</p>
+    <div class="two-col-wide">
+      <div>
+        <h2 class="section-heading">A growing commuter town running on a 1983 water network.</h2>
+        <div class="body-text">
+          <p>Lozorno is a town of about 3,600 people roughly 20 km from Bratislava, Slovakia's capital. As the capital's commuter belt expands, the town is growing, with 152 new homes already approved.</p>
+          <p>Its drinking water comes from three local wells and runs through a PVC distribution network built in 1983. The town reports falling water levels in its wells and has little in-house engineering capacity for long-term planning.</p>
+          <p>For Dartmouth's ENGS 45 Sustainable Urban Systems, our team of three studied Lozorno's infrastructure using data supplied by the mayor and PAVOS, the town's water operator. I was responsible for the drinking water analysis.</p>
+        </div>
+      </div>
+      <!-- Right image: lozorno-network.jpg (the map of the town's pipe network) -->
+      <div class="media-bleed problem-media">
+        <div class="img-block photo" style="background-image:url('lozorno-network.jpg');"></div>
+        <p class="img-caption">Lozorno's existing distribution network and well line</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. The Analysis -->
+  <section class="section">
+    <p class="section-label">The Analysis</p>
+    <h2 class="section-heading">Comparing what the wells supply with what the town will need.</h2>
+    <div class="body-text">
+      <p>I started from the operator's own numbers: 194,573 m³ pumped per year against 152,877 m³ billed to customers. The difference showed how much the network loses, and the billing data gave household use of about 99 liters per person per day, in line with the Slovak average of 80 to 100.</p>
+      <p>Because well levels are already falling at today's pumping rate, I treated current pumping as the realistic supply ceiling rather than the much higher legal permit limit. I then projected demand to 2045 using our team's population model, sizing for the high-growth scenario since new infrastructure has to last for decades.</p>
+    </div>
+  </section>
+
+  <!-- 3. The Findings -->
+  <section class="section">
+    <p class="section-label">The Findings</p>
+    <h2 class="section-heading">The system has no room left for growth.</h2>
+    <div class="body-text">
+      <p>Once losses are accounted for, meeting today's demand requires 194,494 m³ per year. The wells pump 194,573. That leaves a margin of 79 m³ per year, effectively nothing. The 750 m³ reservoir also falls about 50 m³ short of demand on a peak summer day.</p>
+      <p>21.4% of pumped water never reaches a customer, against a 15% EU best-practice target. Because household use is already moderate, conservation alone cannot close the gap.</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <p class="stat-number">79 m³</p>
+        <p class="stat-label">Yearly margin left</p>
+        <p class="stat-sub">Between current pumping and current demand</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">21.4%</p>
+        <p class="stat-label">Water lost in the network</p>
+        <p class="stat-sub">Against a 15% EU best-practice target</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">2027</p>
+        <p class="stat-label">Supply exceeded, even with leak repairs</p>
+        <p class="stat-sub">High-growth scenario. Without repairs, demand already equals supply</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <p class="table-title">Projected annual shortfall, high-growth scenario (m³/year)</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Residents</th>
+            <th>Shortfall at current losses</th>
+            <th>Shortfall with losses cut to 15%</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2025</td><td>3,602</td><td>0</td><td>14,718 surplus</td></tr>
+          <tr><td>2030</td><td>4,229</td><td>33,771</td><td>16,578</td></tr>
+          <tr><td>2035</td><td>4,523</td><td>49,646</td><td>31,258</td></tr>
+          <tr><td>2040</td><td>4,804</td><td>64,819</td><td>45,288</td></tr>
+          <tr><td>2045</td><td>5,051</td><td>78,177</td><td>57,620</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Graph image: lozorno-demand.png (your demand vs. supply line graph) -->
+    <div class="chart-block">
+      <div class="img-block chart" style="background-image:url('lozorno-demand.png');"></div>
+      <p class="img-caption">Projected demand against the current supply ceiling, 2025 to 2045</p>
+    </div>
+  </section>
+
+  <!-- 4. The Solutions -->
+  <section class="section">
+    <p class="section-label">The Solutions</p>
+    <h2 class="section-heading">Fix the leaks first, then add new supply.</h2>
+    <div class="body-text">
+      <p>I proposed three measures, phased so the cheapest and fastest come first.</p>
+    </div>
+
+    <div class="interventions">
+      <div class="intervention">
+        <span class="intervention-num">1</span>
+        <div>
+          <p class="intervention-title">Repair the distribution network</p>
+          <p class="intervention-desc">Bring losses from 21.4% to the 15% target, cutting the 2045 shortfall by about 20,500 m³/yr without drawing more from the wells.</p>
+        </div>
+        <span class="intervention-cost">€235k to €621k</span>
+      </div>
+      <div class="intervention">
+        <span class="intervention-num">2</span>
+        <div>
+          <p class="intervention-title">Drill a new borehole</p>
+          <p class="intervention-desc">A modest 1 to 2 l/s well adding about 25,000 to 30,000 m³/yr, only after a hydrogeological survey confirms the aquifer can support it.</p>
+        </div>
+        <span class="intervention-cost">€131k to €269k</span>
+      </div>
+      <div class="intervention">
+        <span class="intervention-num">3</span>
+        <div>
+          <p class="intervention-title">Connect to the regional water main</p>
+          <p class="intervention-desc">The BVS regional main already crosses Lozorno's land. A 530 m pipe through farmland would add about 30,000 to 35,000 m³/yr from a source independent of the local aquifer.</p>
+        </div>
+        <span class="intervention-cost">€205k to €407k</span>
+      </div>
+    </div>
+
+    <div class="two-col-wide plan-block">
+      <div class="body-text">
+        <p>Phased from 2026 to 2035, the three measures add an estimated 75,500 to 85,500 m³/yr, roughly the size of the 78,000 m³/yr shortfall projected for 2045. Total cost is estimated at €571,000 to €1.3 million. If EU and Slovak co-financing covers 85% of eligible costs, the town's share drops to about €86,000 to €195,000.</p>
+        <p>Two steps should start right away: a hydrogeological survey of the aquifer, and talks with BVS, since a connection takes 4 to 8 years to permit and build.</p>
+      </div>
+      <!-- Right image: bvs-route.jpg (your Google Maps 530 m route screenshot) -->
+      <div class="media-bleed">
+        <div class="img-block photo" style="background-image:url('bvs-route.jpg');"></div>
+        <p class="img-caption">Proposed 530 m connection route to the BVS main</p>
+      </div>
+    </div>
+
+    <p class="results-note">Costs are planning-level estimates. The final connection point is subject to BVS approval.</p>
+  </section>
+
+</main>
+
+<hr class="divider" style="max-width:1080px; margin:0 auto;">
+
+<div class="project-nav">
+  <a href="freebee.html">
+    <p class="project-nav-label">Back</p>
+    <p class="project-nav-title">FreeBee</p>
+  </a>
+  <a href="bridge.html" class="next">
+    <p class="project-nav-label">Next</p>
+    <p class="project-nav-title">Birch Truss Bridge</p>
+  </a>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="mailto:oneill.m.liam@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/liam-o-neill-b923a3294/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+  <small>© 2026 Liam O'Neill</small>
+</footer>
+
+</body>
+</html>
