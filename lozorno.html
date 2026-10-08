@@ -45,7 +45,7 @@
 
     .img-block { width:100%; background:#7E99A5; background-size:cover; background-position:center; background-repeat:no-repeat; }
     .img-block.photo { aspect-ratio:4 / 3; }
-    .img-block.map { aspect-ratio:1 / 1; }
+    .img-block.plan { aspect-ratio:2048 / 1425; background-size:contain; background-color:var(--white); }
     .img-block.chart { aspect-ratio:16 / 9; background-size:contain; background-color:var(--white); }
     .img-caption { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; }
 
@@ -146,8 +146,8 @@
       </div>
       <!-- Right image: lozorno-network.jpg -->
       <div class="media-bleed problem-media">
-        <div class="img-block map" style="background-image:url('lozorno-network.jpg');"></div>
-        <p class="img-caption">Lozorno's existing distribution network and well line</p>
+        <div class="img-block photo" style="background-image:url('lozorno-network.jpg');"></div>
+        <p class="img-caption">Lozorno's distribution network (purple) and supply line from the wells (blue). Imagery © GKÚ, NLC</p>
       </div>
     </div>
   </section>
@@ -156,9 +156,16 @@
   <section class="section">
     <p class="section-label">The Analysis</p>
     <h2 class="section-heading">Comparing what the wells supply with what the town will need.</h2>
-    <div class="body-text">
-      <p>Working from municipal, regional, and national records, I started from the operator's own numbers: 194,573 m³ pumped per year against 152,877 m³ billed to customers. The difference showed how much the network loses, and the billing data gave household use of about 99 liters per person per day, in line with the Slovak average of 80 to 100.</p>
-      <p>Because well levels are already falling at today's pumping rate, I treated current pumping as the realistic supply ceiling rather than the much higher legal permit limit. I then projected demand to 2045 using our team's population model, sizing for the high-growth scenario since new infrastructure has to last for decades.</p>
+    <div class="two-col-wide">
+      <div class="body-text">
+        <p>Working from municipal, regional, and national records, I started from the operator's own numbers: 194,573 m³ pumped per year against 152,877 m³ billed to customers. The difference showed how much the network loses, and the billing data gave household use of about 99 liters per person per day, in line with the Slovak average of 80 to 100.</p>
+        <p>Because well levels are already falling at today's pumping rate, I treated current pumping as the realistic supply ceiling rather than the much higher legal permit limit. I then projected demand to 2045 using our team's population model, sizing for the high-growth scenario since new infrastructure has to last for decades.</p>
+      </div>
+      <!-- Right image: lozorno-development.jpg -->
+      <div class="media-bleed">
+        <div class="img-block plan" style="background-image:url('lozorno-development.jpg');"></div>
+        <p class="img-caption">Approved Záhumenice housing development, a main driver of projected growth. Drawing: WhatArchitects, 2023</p>
+      </div>
     </div>
   </section>
 
@@ -167,20 +174,20 @@
     <p class="section-label">The Findings</p>
     <h2 class="section-heading">The system has no room left for growth.</h2>
     <div class="body-text">
-      <p>Once losses are accounted for, meeting today's demand requires 194,494 m³ per year. The wells pump 194,573. That leaves a margin of 79 m³ per year, effectively nothing. The 750 m³ reservoir also falls about 50 m³ short of demand on a peak summer day.</p>
-      <p>22% of pumped water never reaches a customer, against a 15% EU best-practice target. Because household use is already moderate, conservation alone cannot close the gap.</p>
+      <p>Once losses are accounted for, meeting today's demand requires 194,494 m³ per year. The wells pump 194,573. That leaves a margin of 79 m³ per year, about enough for one more resident. The 750 m³ reservoir also falls about 50 m³ short of demand on a peak summer day.</p>
+      <p>22% of pumped water, about 41,700 m³ a year or roughly 17 Olympic swimming pools, never reaches a customer, against a 15% EU best-practice target. Because household use is already moderate, conservation alone cannot close the gap.</p>
     </div>
 
     <div class="stats-row">
       <div class="stat">
         <p class="stat-number">79 m³</p>
         <p class="stat-label">Yearly margin left</p>
-        <p class="stat-sub">Between current pumping and current demand</p>
+        <p class="stat-sub">Between current pumping and current demand, about enough for one more resident</p>
       </div>
       <div class="stat">
         <p class="stat-number">22%</p>
         <p class="stat-label">Water lost in the network</p>
-        <p class="stat-sub">Against a 15% EU best-practice target</p>
+        <p class="stat-sub">Roughly 17 Olympic pools a year, against a 15% EU best-practice target</p>
       </div>
       <div class="stat">
         <p class="stat-number">2027</p>
