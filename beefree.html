@@ -61,15 +61,25 @@
     .img-block.medium { height:300px; }
     .img-caption { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; }
 
-    /* Varroa photo: extends past the text column to near the right edge of the screen, taller shape */
-    .problem-media {
+    /* Right-column photos extend past the text column to near the right edge of the screen */
+    .media-bleed {
       margin-right: calc(-1 * max(0px, 50vw - var(--max) / 2));
-      margin-top: 36px;
     }
+    .problem-media { margin-top: 36px; }
+
+    /* Varroa photo: taller shape, kept centered on the circled mite */
     .img-block.mite {
       aspect-ratio: 4 / 3;
       background-size: cover;
       background-position: 35% center;
+      background-repeat: no-repeat;
+    }
+
+    /* V2 parts photo */
+    .img-block.v2 {
+      aspect-ratio: 4 / 3;
+      background-size: cover;
+      background-position: center;
       background-repeat: no-repeat;
     }
 
@@ -156,7 +166,7 @@
         </div>
       </div>
       <!-- Varroa photo: mite-bee.jpg -->
-      <div class="problem-media">
+      <div class="media-bleed problem-media">
         <div class="img-block mite" style="background-image:url('mite-bee.jpg');"></div>
         <p class="img-caption">A honeybee parasitized by <em>Varroa destructor</em> (circled)</p>
       </div>
@@ -204,12 +214,6 @@
     <div class="body-text" style="margin-top:36px;">
       <p>On a live colony at a local apiary, a single treatment produced a 1,700% increase in mite drop, with no observed swarming or disruption to the hive.</p>
     </div>
-
-    <!-- Photo: beefree-ofarm.jpg (O-farm live hive test), not uploaded yet -->
-    <div style="margin-top:28px;">
-      <div class="img-block medium" style="background-color:#B8924A;"></div>
-      <p class="img-caption">Live-hive field test at Dartmouth's Organic Farm, Hanover NH</p>
-    </div>
   </section>
 
   <!-- 4. What I'm building now -->
@@ -221,9 +225,9 @@
         <p>The first prototype proved the treatment works. The current version, funded by a Sayles Research Grant from Dartmouth's Ethics Institute, is about making it real.</p>
         <p>I am building it from the ground up using raw electronics, a single-button control system, a motor-driven sifter and fan, and a consolidated 3D-printed housing. The goal is a sturdy, fully integrated, battery-powered device a beekeeper can rely on for daily use.</p>
       </div>
-      <!-- Photo: beefree-v2.jpg (v2 parts / CAD / workbench), not uploaded yet -->
-      <div>
-        <div class="img-block tall" style="background-color:#C8A055;"></div>
+      <!-- V2 parts photo: v2-parts.jpeg -->
+      <div class="media-bleed">
+        <div class="img-block v2" style="background-image:url('v2-parts.jpeg');"></div>
         <p class="img-caption">Version 2, in development</p>
       </div>
     </div>
