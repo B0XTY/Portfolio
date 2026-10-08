@@ -46,7 +46,6 @@
     .img-block { width:100%; background:#7E99A5; background-size:cover; background-position:center; background-repeat:no-repeat; }
     .img-block.photo { aspect-ratio:4 / 3; }
     .img-block.plan { aspect-ratio:2048 / 1425; background-size:contain; background-color:var(--white); }
-    .img-block.chart { aspect-ratio:16 / 9; background-size:contain; background-color:var(--white); }
     .img-caption { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; }
 
     .media-bleed { margin-right: calc(-1 * max(0px, 50vw - var(--max) / 2)); }
@@ -61,17 +60,18 @@
     .stat-sub { font-size:12px; color:var(--muted); margin-top:4px; }
     .results-note { font-size:12px; color:var(--muted); font-style:italic; margin-top:12px; }
 
-    /* Data table */
-    .table-wrap { margin-top:36px; overflow-x:auto; }
-    .table-title { font-size:13px; font-weight:500; margin-bottom:10px; }
-    table { width:100%; border-collapse:collapse; background:var(--white); border:1px solid rgba(28,28,26,0.10); font-size:14px; }
+    /* Shortfall table + demand graph, side by side */
+    .table-title { font-size:13px; font-weight:500; margin:36px 0 10px; }
+    .data-row { display:grid; grid-template-columns:max-content minmax(0,1fr); column-gap:24px; align-items:stretch; }
+    .table-wrap { overflow-x:auto; }
+    table { border-collapse:collapse; background:var(--white); border:1px solid rgba(28,28,26,0.10); font-size:14px; }
     th, td { padding:12px 16px; text-align:right; border-bottom:1px solid rgba(28,28,26,0.08); white-space:nowrap; }
     th:first-child, td:first-child { text-align:left; }
     th { font-size:11px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
     td { font-weight:300; }
     tr:last-child td { border-bottom:none; }
-
-    .chart-block { margin-top:36px; }
+    .img-block.chart { min-height:200px; background-size:contain; background-color:var(--white); border:1px solid rgba(28,28,26,0.10); }
+    .data-spacer { display:block; }
 
     /* Interventions */
     .interventions { margin-top:28px; display:grid; gap:2px; border:1px solid rgba(28,28,26,0.10); }
@@ -96,6 +96,13 @@
     .footer-links a { font-size:13px; font-weight:400; color:var(--muted); text-decoration:none; transition:color .2s; }
     .footer-links a:hover { color:var(--ink); }
     footer small { font-size:12px; color:var(--muted); }
+
+    /* Tablets: graph moves under the table */
+    @media (max-width:960px) {
+      .data-row { grid-template-columns:1fr; }
+      .data-spacer { display:none; }
+      .img-block.chart { aspect-ratio:16 / 9; min-height:0; margin-top:24px; }
+    }
 
     @media (max-width:700px) {
       nav { padding:14px 20px; }
@@ -155,7 +162,7 @@
   <!-- 2. The Analysis -->
   <section class="section">
     <p class="section-label">The Analysis</p>
-    <h2 class="section-heading">Comparing what the wells supply to what the town will need.</h2>
+    <h2 class="section-heading">Comparing what the wells supply with what the town will need.</h2>
     <div class="two-col-wide">
       <div class="body-text">
         <p>Working from municipal, regional, and national records, I started from the operator's own numbers: 194,573 m³ pumped per year against 152,877 m³ billed to customers. The difference showed how much the network loses, and the billing data gave household use of about 99 liters per person per day, in line with the Slovak average of 80 to 100.</p>
@@ -196,30 +203,30 @@
       </div>
     </div>
 
-    <div class="table-wrap">
-      <p class="table-title">Projected annual shortfall, high-growth scenario (m³/year)</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Residents</th>
-            <th>Shortfall at current losses</th>
-            <th>Shortfall with losses cut to 15%</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>2025</td><td>3,602</td><td>0</td><td>14,718 surplus</td></tr>
-          <tr><td>2030</td><td>4,229</td><td>33,771</td><td>16,578</td></tr>
-          <tr><td>2035</td><td>4,523</td><td>49,646</td><td>31,258</td></tr>
-          <tr><td>2040</td><td>4,804</td><td>64,819</td><td>45,288</td></tr>
-          <tr><td>2045</td><td>5,051</td><td>78,177</td><td>57,620</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Graph image: lozorno-demand.png -->
-    <div class="chart-block">
+    <p class="table-title">Projected annual shortfall, high-growth scenario (m³/year)</p>
+    <div class="data-row">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Residents</th>
+              <th>Shortfall at current losses</th>
+              <th>Shortfall with losses cut to 15%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>2025</td><td>3,602</td><td>0</td><td>14,718 surplus</td></tr>
+            <tr><td>2030</td><td>4,229</td><td>33,771</td><td>16,578</td></tr>
+            <tr><td>2035</td><td>4,523</td><td>49,646</td><td>31,258</td></tr>
+            <tr><td>2040</td><td>4,804</td><td>64,819</td><td>45,288</td></tr>
+            <tr><td>2045</td><td>5,051</td><td>78,177</td><td>57,620</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Graph image: lozorno-demand.png -->
       <div class="img-block chart" style="background-image:url('lozorno-demand.png');"></div>
+      <span class="data-spacer"></span>
       <p class="img-caption">Projected demand against the current supply ceiling, 2025 to 2045</p>
     </div>
   </section>
